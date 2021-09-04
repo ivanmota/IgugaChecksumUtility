@@ -37,4 +37,4 @@ After install all required dependencies, make a clone of this project `git clone
 Invoke-psake build.psake.ps1 -taskList Build
 ```
 
-The above code will create the directory **Release** were module build results will be stored.
+The above code will create the directory **Release** were the module build results will be stored.
