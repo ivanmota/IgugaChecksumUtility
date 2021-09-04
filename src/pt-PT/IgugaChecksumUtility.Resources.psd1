@@ -5,7 +5,6 @@ ConvertFrom-StringData @'
 CompareOpProgressCompleted=A comparação hash do ficheiro foi concluída!
 CompareOpProgressMessage=A comparar o hash do ficheiro, origem: {0}
 CompareOpProgressStatus=Em execução...
-Description=Gera e valida checksums para ficheiros e pastas
 ErrorInvalidArgument=O valor do parametro '{0}' não é válido
 ErrorLoadingScript=Ocorreu um erro ao carregar '{0}'.
 ErrorPathNotFound=Não foi possível encontrar o caminho '{0}' porque a mesma não existe.

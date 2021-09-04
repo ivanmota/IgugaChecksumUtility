@@ -5,7 +5,6 @@ ConvertFrom-StringData @'
 CompareOpProgressCompleted=Compare operation completed!
 CompareOpProgressMessage=Comparing file hash, source: {0}
 CompareOpProgressStatus=Running...
-Description=Generate and validate checksums for files or directories
 DiscoveringFilesProgressCompleted=Discovering files completed!
 DiscoveringFilesProgressMessage=Discovering files, from '{0}'
 DiscoveringFilesProgressStatus=Running...
