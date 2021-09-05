@@ -28,7 +28,7 @@ Install-Module -Name platyPS
 [PSScriptAnalyzer](https://github.com/PowerShell/PSScriptAnalyzer), the minimal required version is `1.20.0`. To install it, run the following code:
 
 ```powershell
-powershell Install-Module -Name PSScriptAnalyzer
+Install-Module -Name PSScriptAnalyzer
 ```
 
 After install all required dependencies, make a clone of this project `git clone https://github.com/ivanmota/IgugaChecksumUtility.git` or just download it into a folder and run the following code:
