@@ -1,39 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE report PUBLIC "-//JACOCO//DTD Report 1.1//EN" "report.dtd"[]>
-<report name="Pester (09/06/2021 11:07:32)">
-  <sessioninfo id="this" start="1630926451307" dump="1630926452353" />
-  <package name="src">
-    <class name="src/IgugaChecksumUtility" sourcefilename="IgugaChecksumUtility.psm1">
-      <method name="&lt;script&gt;" desc="()" line="1">
-        <counter type="INSTRUCTION" missed="15" covered="0" />
-        <counter type="LINE" missed="9" covered="0" />
-        <counter type="METHOD" missed="1" covered="0" />
-      </method>
-      <counter type="INSTRUCTION" missed="15" covered="0" />
-      <counter type="LINE" missed="9" covered="0" />
-      <counter type="METHOD" missed="1" covered="0" />
-      <counter type="CLASS" missed="1" covered="0" />
-    </class>
-    <sourcefile name="IgugaChecksumUtility.psm1">
-      <line nr="1" mi="1" ci="0" mb="0" cb="0" />
-      <line nr="5" mi="2" ci="0" mb="0" cb="0" />
-      <line nr="6" mi="2" ci="0" mb="0" cb="0" />
-      <line nr="9" mi="3" ci="0" mb="0" cb="0" />
-      <line nr="11" mi="1" ci="0" mb="0" cb="0" />
-      <line nr="13" mi="2" ci="0" mb="0" cb="0" />
-      <line nr="14" mi="1" ci="0" mb="0" cb="0" />
-      <line nr="17" mi="2" ci="0" mb="0" cb="0" />
-      <line nr="21" mi="1" ci="0" mb="0" cb="0" />
-      <counter type="INSTRUCTION" missed="15" covered="0" />
-      <counter type="LINE" missed="9" covered="0" />
-      <counter type="METHOD" missed="1" covered="0" />
-      <counter type="CLASS" missed="1" covered="0" />
-    </sourcefile>
-    <counter type="INSTRUCTION" missed="15" covered="0" />
-    <counter type="LINE" missed="9" covered="0" />
-    <counter type="METHOD" missed="1" covered="0" />
-    <counter type="CLASS" missed="1" covered="0" />
-  </package>
+<report name="Pester (09/06/2021 20:55:28)">
+  <sessioninfo id="this" start="1630961727788" dump="1630961728590" />
   <package name="src/Classes">
     <class name="src/Classes/IgugaChecksumClass" sourcefilename="Classes/IgugaChecksumClass.ps1">
       <method name="IgugaChecksum" desc="()" line="7">
@@ -134,14 +102,14 @@
     </class>
     <class name="src/Private/Test-IgugaLikeAny" sourcefilename="Private/Test-IgugaLikeAny.ps1">
       <method name="Test-IgugaLikeAny" desc="()" line="6">
-        <counter type="INSTRUCTION" missed="4" covered="0" />
-        <counter type="LINE" missed="4" covered="0" />
-        <counter type="METHOD" missed="1" covered="0" />
+        <counter type="INSTRUCTION" missed="0" covered="4" />
+        <counter type="LINE" missed="0" covered="4" />
+        <counter type="METHOD" missed="0" covered="1" />
       </method>
-      <counter type="INSTRUCTION" missed="4" covered="0" />
-      <counter type="LINE" missed="4" covered="0" />
-      <counter type="METHOD" missed="1" covered="0" />
-      <counter type="CLASS" missed="1" covered="0" />
+      <counter type="INSTRUCTION" missed="0" covered="4" />
+      <counter type="LINE" missed="0" covered="4" />
+      <counter type="METHOD" missed="0" covered="1" />
+      <counter type="CLASS" missed="0" covered="1" />
     </class>
     <class name="src/Private/Write-IgugaColorOutput" sourcefilename="Private/Write-IgugaColorOutput.ps1">
       <method name="Write-IgugaColorOutput" desc="()" line="25">
@@ -236,14 +204,14 @@
       <counter type="CLASS" missed="0" covered="1" />
     </sourcefile>
     <sourcefile name="Private/Test-IgugaLikeAny.ps1">
-      <line nr="6" mi="1" ci="0" mb="0" cb="0" />
-      <line nr="8" mi="1" ci="0" mb="0" cb="0" />
-      <line nr="10" mi="1" ci="0" mb="0" cb="0" />
-      <line nr="13" mi="1" ci="0" mb="0" cb="0" />
-      <counter type="INSTRUCTION" missed="4" covered="0" />
-      <counter type="LINE" missed="4" covered="0" />
-      <counter type="METHOD" missed="1" covered="0" />
-      <counter type="CLASS" missed="1" covered="0" />
+      <line nr="6" mi="0" ci="1" mb="0" cb="0" />
+      <line nr="8" mi="0" ci="1" mb="0" cb="0" />
+      <line nr="10" mi="0" ci="1" mb="0" cb="0" />
+      <line nr="13" mi="0" ci="1" mb="0" cb="0" />
+      <counter type="INSTRUCTION" missed="0" covered="4" />
+      <counter type="LINE" missed="0" covered="4" />
+      <counter type="METHOD" missed="0" covered="1" />
+      <counter type="CLASS" missed="0" covered="1" />
     </sourcefile>
     <sourcefile name="Private/Write-IgugaColorOutput.ps1">
       <line nr="25" mi="1" ci="0" mb="0" cb="0" />
@@ -322,10 +290,10 @@
       <counter type="METHOD" missed="1" covered="0" />
       <counter type="CLASS" missed="1" covered="0" />
     </sourcefile>
-    <counter type="INSTRUCTION" missed="97" covered="56" />
-    <counter type="LINE" missed="73" covered="37" />
-    <counter type="METHOD" missed="4" covered="2" />
-    <counter type="CLASS" missed="4" covered="2" />
+    <counter type="INSTRUCTION" missed="93" covered="60" />
+    <counter type="LINE" missed="69" covered="41" />
+    <counter type="METHOD" missed="3" covered="3" />
+    <counter type="CLASS" missed="3" covered="3" />
   </package>
   <package name="src/Public">
     <class name="src/Public/Compare-IgugaFileHash" sourcefilename="Public/Compare-IgugaFileHash.ps1">
@@ -352,12 +320,12 @@
     </class>
     <class name="src/Public/Get-IgugaPathChecksum" sourcefilename="Public/Get-IgugaPathChecksum.ps1">
       <method name="Get-IgugaPathChecksum" desc="()" line="59">
-        <counter type="INSTRUCTION" missed="17" covered="42" />
-        <counter type="LINE" missed="7" covered="31" />
+        <counter type="INSTRUCTION" missed="11" covered="48" />
+        <counter type="LINE" missed="6" covered="32" />
         <counter type="METHOD" missed="0" covered="1" />
       </method>
-      <counter type="INSTRUCTION" missed="17" covered="42" />
-      <counter type="LINE" missed="7" covered="31" />
+      <counter type="INSTRUCTION" missed="11" covered="48" />
+      <counter type="LINE" missed="6" covered="32" />
       <counter type="METHOD" missed="0" covered="1" />
       <counter type="CLASS" missed="0" covered="1" />
     </class>
@@ -441,7 +409,7 @@
       <line nr="94" mi="0" ci="1" mb="0" cb="0" />
       <line nr="96" mi="0" ci="1" mb="0" cb="0" />
       <line nr="99" mi="0" ci="1" mb="0" cb="0" />
-      <line nr="101" mi="6" ci="0" mb="0" cb="0" />
+      <line nr="101" mi="0" ci="6" mb="0" cb="0" />
       <line nr="103" mi="0" ci="1" mb="0" cb="0" />
       <line nr="104" mi="0" ci="3" mb="0" cb="0" />
       <line nr="107" mi="0" ci="2" mb="0" cb="0" />
@@ -457,8 +425,8 @@
       <line nr="124" mi="5" ci="0" mb="0" cb="0" />
       <line nr="125" mi="1" ci="0" mb="0" cb="0" />
       <line nr="131" mi="0" ci="1" mb="0" cb="0" />
-      <counter type="INSTRUCTION" missed="17" covered="42" />
-      <counter type="LINE" missed="7" covered="31" />
+      <counter type="INSTRUCTION" missed="11" covered="48" />
+      <counter type="LINE" missed="6" covered="32" />
       <counter type="METHOD" missed="0" covered="1" />
       <counter type="CLASS" missed="0" covered="1" />
     </sourcefile>
@@ -571,13 +539,45 @@
       <counter type="METHOD" missed="0" covered="1" />
       <counter type="CLASS" missed="0" covered="1" />
     </sourcefile>
-    <counter type="INSTRUCTION" missed="120" covered="93" />
-    <counter type="LINE" missed="85" covered="73" />
+    <counter type="INSTRUCTION" missed="114" covered="99" />
+    <counter type="LINE" missed="84" covered="74" />
     <counter type="METHOD" missed="1" covered="4" />
     <counter type="CLASS" missed="1" covered="4" />
   </package>
-  <counter type="INSTRUCTION" missed="232" covered="162" />
-  <counter type="LINE" missed="167" covered="123" />
-  <counter type="METHOD" missed="6" covered="10" />
-  <counter type="CLASS" missed="6" covered="9" />
+  <package name="src">
+    <class name="src/IgugaChecksumUtility" sourcefilename="IgugaChecksumUtility.psm1">
+      <method name="&lt;script&gt;" desc="()" line="1">
+        <counter type="INSTRUCTION" missed="15" covered="0" />
+        <counter type="LINE" missed="9" covered="0" />
+        <counter type="METHOD" missed="1" covered="0" />
+      </method>
+      <counter type="INSTRUCTION" missed="15" covered="0" />
+      <counter type="LINE" missed="9" covered="0" />
+      <counter type="METHOD" missed="1" covered="0" />
+      <counter type="CLASS" missed="1" covered="0" />
+    </class>
+    <sourcefile name="IgugaChecksumUtility.psm1">
+      <line nr="1" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="5" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="6" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="9" mi="3" ci="0" mb="0" cb="0" />
+      <line nr="11" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="13" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="14" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="17" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="21" mi="1" ci="0" mb="0" cb="0" />
+      <counter type="INSTRUCTION" missed="15" covered="0" />
+      <counter type="LINE" missed="9" covered="0" />
+      <counter type="METHOD" missed="1" covered="0" />
+      <counter type="CLASS" missed="1" covered="0" />
+    </sourcefile>
+    <counter type="INSTRUCTION" missed="15" covered="0" />
+    <counter type="LINE" missed="9" covered="0" />
+    <counter type="METHOD" missed="1" covered="0" />
+    <counter type="CLASS" missed="1" covered="0" />
+  </package>
+  <counter type="INSTRUCTION" missed="222" covered="172" />
+  <counter type="LINE" missed="162" covered="128" />
+  <counter type="METHOD" missed="5" covered="11" />
+  <counter type="CLASS" missed="5" covered="10" />
 </report>
