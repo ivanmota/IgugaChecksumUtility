@@ -105,21 +105,21 @@ function IgugaChecksumUtility {
 
     if ($Mode -eq "Validate") {
         try {
-            [ValidateResult[]]$Results = Test-IgugaChecksumFile -FilePath $Path -Algorithm $Algorithm -Silent:$Silent
+            $Results = Test-IgugaChecksumFile -FilePath $Path -Algorithm $Algorithm -Silent:$Silent
             $Script:TotalOfItems = $Results.Length
             foreach ($Result in $Results) {
                 switch ($Result.Status) {
-                    [ValidateResultStatus]::Pass {
+                    "PASS" {
                         $Script:ReportItemsValid++
                         Write-IgugaReportContent -Text $($Script:LocalizedData.ValidationPassed -f $Result.FilePath) -ForegroundColor Green -OutputFilePath $OutputFilePath -Silent:$Silent
                         break;
                     }
-                    [ValidateResultStatus]::Fail {
+                    "FAIL" {
                         $Script:ReportItemsInvalid++
                         Write-IgugaReportContent -Text $($Script:LocalizedData.ValidationFailed -f $Result.FilePath, $Result.Hash, $Result.ExpectedHash) -ForegroundColor Red -OutputFilePath $OutputFilePath -Silent:$Silent
                         break;
                     }
-                    [ValidateResultStatus]::FileNotFound {
+                    "NOT_FOUND" {
                         $Script:ReportItemsFileNotFound++
                         Write-IgugaReportContent -Text "[-] $($Script:LocalizedData.ErrorUtilityValidateFileNotFound -f $Result.FilePath)" -ForegroundColor Red -OutputFilePath $OutputFilePath -Silent:$Silent
                         break;
@@ -136,15 +136,15 @@ function IgugaChecksumUtility {
         }
     } elseif ($Mode -eq "Compare") {
         try {
-            [ValidateResult]$Results = Compare-IgugaFileHash -FilePath $Path -Algorithm $Algorithm -Hash $Hash -Silent:$Silent
+            $Results = Compare-IgugaFileHash -FilePath $Path -Algorithm $Algorithm -Hash $Hash -Silent:$Silent
             $Script:TotalOfItems = 1
             switch ($Result.Status) {
-                [ValidateResultStatus]::Pass {
+                "PASS" {
                     $Script:ReportItemsValid++
                     Write-IgugaReportContent -Text $($Script:LocalizedData.ValidationPassed -f $Result.FilePath) -ForegroundColor Green -OutputFilePath $OutputFilePath -Silent:$Silent
                     break;
                 }
-                [ValidateResultStatus]::Fail {
+                "FAIL" {
                     $Script:ReportItemsInvalid++
                     Write-IgugaReportContent -Text $($Script:LocalizedData.ValidationFailed -f $Result.FilePath, $Result.Hash, $Result.ExpectedHash) -ForegroundColor Green -OutputFilePath $OutputFilePath -Silent:$Silent
                     break;
