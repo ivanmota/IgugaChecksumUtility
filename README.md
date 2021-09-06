@@ -10,25 +10,33 @@ For creating a build the projects has the following module dependencies:
 [psake](https://github.com/psake/psake), the minimal required version `4.9.0`. To install it, run the following powershell command:
 
 ```powershell
-Install-Module -Name psake
+Install-Module -Name psake -Scope CurrentUser
 ```
 
 [Pester](https://github.com/pester), the minimal required version is `5.3.0`. To install it, run the following powershell command:
 
 ```powershell
-Install-Module -Name Pester
+Install-Module -Name Pester -Scope CurrentUser -Force -SkipPublisherCheck
 ```
 
 [platyPS](https://github.com/PowerShell/platyPS), the minimal required version is `0.14.2`. To install it, run the following powershell command:
 
 ```powershell
-Install-Module -Name platyPS
+Install-Module -Name platyPS -Scope CurrentUser
 ```
 
 [PSScriptAnalyzer](https://github.com/PowerShell/PSScriptAnalyzer), the minimal required version is `1.20.0`. To install it, run the following powershell command:
 
 ```powershell
-Install-Module -Name PSScriptAnalyzer
+Install-Module -Name PSScriptAnalyzer -Scope CurrentUser
+```
+
+> On Windows by default only digitally signed Module are allowed to run.
+Because `psake` is not digitally signed you will not be allowed to run it.
+Only for DEV enviroment, we suggest you to enable Execution Policy Unrestricted for the current user. Run the following Powershell command to enable it:
+
+```powershell
+Set-ExecutionPolicy Unrestricted -Scope CurrentUser
 ```
 
 After install all required dependencies, make a clone of this project `git clone https://github.com/ivanmota/IgugaChecksumUtility.git` or just download it into a folder and run the following powershell command:
