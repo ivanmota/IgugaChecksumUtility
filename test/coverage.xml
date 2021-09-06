@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE report PUBLIC "-//JACOCO//DTD Report 1.1//EN" "report.dtd"[]>
-<report name="Pester (09/06/2021 09:12:48)">
-  <sessioninfo id="this" start="1630919566186" dump="1630919568522" />
+<report name="Pester (09/06/2021 10:17:51)">
+  <sessioninfo id="this" start="1630923470490" dump="1630923471503" />
   <package name="src">
     <class name="src/IgugaChecksumUtility" sourcefilename="IgugaChecksumUtility.psm1">
       <method name="&lt;script&gt;" desc="()" line="1">
@@ -352,12 +352,12 @@
     </class>
     <class name="src/Public/Get-IgugaPathChecksum" sourcefilename="Public/Get-IgugaPathChecksum.ps1">
       <method name="Get-IgugaPathChecksum" desc="()" line="59">
-        <counter type="INSTRUCTION" missed="18" covered="41" />
-        <counter type="LINE" missed="8" covered="30" />
+        <counter type="INSTRUCTION" missed="17" covered="42" />
+        <counter type="LINE" missed="7" covered="31" />
         <counter type="METHOD" missed="0" covered="1" />
       </method>
-      <counter type="INSTRUCTION" missed="18" covered="41" />
-      <counter type="LINE" missed="8" covered="30" />
+      <counter type="INSTRUCTION" missed="17" covered="42" />
+      <counter type="LINE" missed="7" covered="31" />
       <counter type="METHOD" missed="0" covered="1" />
       <counter type="CLASS" missed="0" covered="1" />
     </class>
@@ -437,28 +437,28 @@
       <line nr="88" mi="0" ci="1" mb="0" cb="0" />
       <line nr="89" mi="0" ci="1" mb="0" cb="0" />
       <line nr="90" mi="0" ci="1" mb="0" cb="0" />
-      <line nr="93" mi="0" ci="2" mb="0" cb="0" />
-      <line nr="94" mi="1" ci="0" mb="0" cb="0" />
-      <line nr="96" mi="0" ci="1" mb="0" cb="0" />
-      <line nr="99" mi="0" ci="1" mb="0" cb="0" />
-      <line nr="101" mi="6" ci="0" mb="0" cb="0" />
-      <line nr="103" mi="0" ci="1" mb="0" cb="0" />
-      <line nr="104" mi="0" ci="3" mb="0" cb="0" />
-      <line nr="107" mi="0" ci="2" mb="0" cb="0" />
-      <line nr="109" mi="1" ci="0" mb="0" cb="0" />
-      <line nr="112" mi="0" ci="1" mb="0" cb="0" />
+      <line nr="94" mi="0" ci="2" mb="0" cb="0" />
+      <line nr="95" mi="0" ci="1" mb="0" cb="0" />
+      <line nr="97" mi="0" ci="1" mb="0" cb="0" />
+      <line nr="100" mi="0" ci="1" mb="0" cb="0" />
+      <line nr="102" mi="6" ci="0" mb="0" cb="0" />
+      <line nr="104" mi="0" ci="1" mb="0" cb="0" />
+      <line nr="105" mi="0" ci="3" mb="0" cb="0" />
+      <line nr="108" mi="0" ci="2" mb="0" cb="0" />
+      <line nr="110" mi="1" ci="0" mb="0" cb="0" />
       <line nr="113" mi="0" ci="1" mb="0" cb="0" />
       <line nr="114" mi="0" ci="1" mb="0" cb="0" />
       <line nr="115" mi="0" ci="1" mb="0" cb="0" />
-      <line nr="116" mi="0" ci="2" mb="0" cb="0" />
-      <line nr="117" mi="0" ci="1" mb="0" cb="0" />
-      <line nr="120" mi="0" ci="1" mb="0" cb="0" />
-      <line nr="122" mi="0" ci="2" mb="0" cb="0" />
-      <line nr="124" mi="5" ci="0" mb="0" cb="0" />
-      <line nr="125" mi="1" ci="0" mb="0" cb="0" />
-      <line nr="131" mi="0" ci="1" mb="0" cb="0" />
-      <counter type="INSTRUCTION" missed="18" covered="41" />
-      <counter type="LINE" missed="8" covered="30" />
+      <line nr="116" mi="0" ci="1" mb="0" cb="0" />
+      <line nr="117" mi="0" ci="2" mb="0" cb="0" />
+      <line nr="118" mi="0" ci="1" mb="0" cb="0" />
+      <line nr="121" mi="0" ci="1" mb="0" cb="0" />
+      <line nr="123" mi="0" ci="2" mb="0" cb="0" />
+      <line nr="125" mi="5" ci="0" mb="0" cb="0" />
+      <line nr="126" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="132" mi="0" ci="1" mb="0" cb="0" />
+      <counter type="INSTRUCTION" missed="17" covered="42" />
+      <counter type="LINE" missed="7" covered="31" />
       <counter type="METHOD" missed="0" covered="1" />
       <counter type="CLASS" missed="0" covered="1" />
     </sourcefile>
@@ -557,13 +557,13 @@
       <counter type="METHOD" missed="0" covered="1" />
       <counter type="CLASS" missed="0" covered="1" />
     </sourcefile>
-    <counter type="INSTRUCTION" missed="105" covered="92" />
-    <counter type="LINE" missed="72" covered="72" />
+    <counter type="INSTRUCTION" missed="104" covered="93" />
+    <counter type="LINE" missed="71" covered="73" />
     <counter type="METHOD" missed="1" covered="4" />
     <counter type="CLASS" missed="1" covered="4" />
   </package>
-  <counter type="INSTRUCTION" missed="217" covered="161" />
-  <counter type="LINE" missed="154" covered="122" />
+  <counter type="INSTRUCTION" missed="216" covered="162" />
+  <counter type="LINE" missed="153" covered="123" />
   <counter type="METHOD" missed="6" covered="10" />
   <counter type="CLASS" missed="6" covered="9" />
 </report>
