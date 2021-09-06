@@ -131,7 +131,7 @@ function IgugaChecksumUtility {
             if ($_.CategoryInfo -eq [ErrorCategory]::ObjectNotFound) {
                 Write-Error -Message "[-] $($Script:LocalizedData.ErrorUtilityPathNotValidFile -f $Mode, $Path)" -Category ObjectNotFound
             } else {
-                Write-Error -Message "[-] $($_.Exception)" -Category $_.CategoryInfo
+                Write-Error -Message "[-] $($_.Exception)"
             }
         }
     } elseif ($Mode -eq "Compare") {
@@ -157,7 +157,7 @@ function IgugaChecksumUtility {
             } elseif ($_.CategoryInfo -eq [ErrorCategory]::InvalidArgument) {
                 Write-Error -Message "[-] $($Script:LocalizedData.ErrorUtilityPathNotValidFile -f $Mode, 'Hash')" -Category InvalidArgument
             } else {
-                Write-Error -Message "[-] $($_.Exception)" -Category $_.CategoryInfo
+                Write-Error -Message "[-] $($_.Exception)"
             }
         }
     } elseif ($Mode -eq "Generate") {
