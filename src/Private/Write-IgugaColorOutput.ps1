@@ -18,22 +18,20 @@ function Write-IgugaColorOutput() {
         [Object]
         $MessageData,
 
-        [string]
+        [System.ConsoleColor]
         $ForegroundColor
     )
 
-    # save the current color
-    $CurrentColor = $host.UI.RawUI.ForegroundColor;
-
     if ($PSBoundParameters.ContainsKey("ForegroundColor") -and $ForegroundColor) {
-        # set the new color
-        $host.UI.RawUI.ForegroundColor = $ForegroundColor
+        if (($null -ne $Host.UI) -and ($null -ne $Host.UI.RawUI) -and ($null -ne $Host.UI.RawUI.ForegroundColor)) {
+            $PreviousColor = $Host.UI.RawUI.ForegroundColor
+            $Host.UI.RawUI.ForegroundColor = $ForegroundColor
+        }
     }
 
-    Write-Output $MessageData
+    $MessageData
 
-    if ($PSBoundParameters.ContainsKey("ForegroundColor") -and $ForegroundColor) {
-        # restore the original color
-        $host.UI.RawUI.ForegroundColor = $CurrentColor
+    if ($null -ne $PreviousColor) {
+        $Host.UI.RawUI.ForegroundColor = $PreviousColor
     }
 }
