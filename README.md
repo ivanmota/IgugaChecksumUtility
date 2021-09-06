@@ -79,4 +79,4 @@ Invoke-psake build.psake.ps1 -taskList Install
 Import-Module IgugaChecksumUtility
 ```
 
-The above above commands will create the build, than create the module name and the current version folder on the current Powershell Modules directory of the current user and than copy all the `Release` content to it and following with the import module procedure.
+The above commands will create the build, than create the module name and the current version folder on the current Powershell Modules directory of the current user and than copy all the `Release` content to it and following with the import module procedure.
