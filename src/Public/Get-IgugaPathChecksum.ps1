@@ -90,7 +90,7 @@ function Get-IgugaPathChecksum {
             File = $true
         }
 
-        if ($PSBoundParameters.ContainsKey("Depth") -and $Depth -and ($Depth -ge 0)) {
+        if ($PSBoundParameters.ContainsKey("Depth") -and ($Depth -ge 0)) {
             $Parameters.Depth = $Depth
         } else {
             $Parameters.Recurse = $true
