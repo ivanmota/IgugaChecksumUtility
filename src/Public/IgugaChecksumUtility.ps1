@@ -174,7 +174,7 @@ function IgugaChecksumUtility {
             $Paramters.Depth = $Depth
         }
 
-        $Checksums = Get-IgugaPathChecksum @PSBoundParameters
+        $Checksums = Get-IgugaPathChecksum @Paramters
 
         $OutFileName = ""
         # If OutFile is to be generated, then set the outfile name to match the algorithm
