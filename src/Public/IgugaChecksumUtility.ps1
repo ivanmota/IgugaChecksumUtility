@@ -155,7 +155,7 @@ function IgugaChecksumUtility {
             }
         }
     } elseif ($Mode -eq "Generate") {
-        $Paramters = @{
+        $Parameters = @{
             Path = $Path
             Algorithm = $Algorithm
             UseAbsolutePath = $UseAbsolutePath.IsPresent
@@ -163,18 +163,18 @@ function IgugaChecksumUtility {
         }
 
         if ($PSBoundParameters.ContainsKey("Filter")) {
-            $Paramters.Filter = $Filter
+            $Parameters.Filter = $Filter
         }
 
         if ($PSBoundParameters.ContainsKey("Exclude")) {
-            $Paramters.Exclude = $Exclude
+            $Parameters.Exclude = $Exclude
         }
 
         if ($PSBoundParameters.ContainsKey("Depth")) {
-            $Paramters.Depth = $Depth
+            $Parameters.Depth = $Depth
         }
 
-        $Checksums = Get-IgugaPathChecksum @Paramters
+        $Checksums = Get-IgugaPathChecksum @Parameters
 
         $OutFileName = ""
         # If OutFile is to be generated, then set the outfile name to match the algorithm
