@@ -27,7 +27,7 @@ Describe 'Compare-IgugaFileHash' {
         $KnownHash = "D0B79192B857365CCE727E6CE415ACCB2F19CADECD549EC72ECD3627F5B7F8F3"
         $Result = Compare-IgugaFileHash -FilePath $FilePath -Hash $KnownHash -Silent
         $Result.Status | Should -Be "PASS"
-        $Result.Hash | Should -Be -ExpectedValue $KnownHash
+        $Result.Hash | Should -Be $KnownHash
     }
 
     It 'Fail Compare' {
@@ -35,6 +35,6 @@ Describe 'Compare-IgugaFileHash' {
         $KnownHash = "D0B79192B857365CCE727E6CE415ACCB2F19CADECD549EC72ECD3627F5B7F8F3"
         $Result = Compare-IgugaFileHash -FilePath $FilePath -Hash $KnownHash -Silent
         $Result.Status | Should -Be "FAIL"
-        $Result.Hash | Should -Not -Be -ExpectedValue $KnownHash
+        $Result.Hash | Should -Not -Be $KnownHash
     }
 }

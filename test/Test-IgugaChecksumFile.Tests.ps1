@@ -27,8 +27,8 @@ Describe 'Test-IgugaChecksumFile' {
         $Results = Test-IgugaChecksumFile -FilePath $ChecksumFilePath -Algorithm SHA256 -Silent
 
         for ($i = 0; $i -lt $Results.Length; $i++) {
-            $Results[$i].FilePath | Should -Be -ExpectedValue $Expected[$i].FilePath
-            $Results[$i].Status | Should -Be -ExpectedValue $Expected[$i].Status
+            $Results[$i].FilePath | Should -Be $Expected[$i].FilePath
+            $Results[$i].Status | Should -Be $Expected[$i].Status
         }
     }
 }

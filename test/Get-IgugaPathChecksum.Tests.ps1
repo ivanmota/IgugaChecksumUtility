@@ -20,7 +20,7 @@ Describe 'Get-IgugaPathChecksum' {
 
         $Results = Get-IgugaPathChecksum -Path $FilePath -Silent
         $Results.Length | Should -Be 1
-        $Results[0].Checksum | Should -Be -ExpectedValue $Checksum
+        $Results[0].Checksum | Should -Be $Checksum
     }
 
     It 'Pass get single file checksum with absolute path' {
@@ -29,7 +29,7 @@ Describe 'Get-IgugaPathChecksum' {
 
         $Results = Get-IgugaPathChecksum -Path $FilePath -Silent -UseAbsolutePath
         $Results.Length | Should -Be 1
-        $Results[0].Checksum | Should -Be -ExpectedValue $Checksum
+        $Results[0].Checksum | Should -Be $Checksum
     }
 
     It 'Pass get directory checksum' {
@@ -39,8 +39,8 @@ Describe 'Get-IgugaPathChecksum' {
         $ExpectedChecksums += Get-IgugaChecksum -FilePath $(Join-Path -Path $Path -ChildPath "SubDirectory\File2.docx") -AlternactiveFilePath "./SubDirectory/File2.docx"
 
         $Results = Get-IgugaPathChecksum -Path $Path -Exclude "SHA256SUMS.txt" -Silent
-        $Results.Length | Should -Be -ExpectedValue $ExpectedChecksums.Length
-        $Results[0].Checksum | Should -Be -ExpectedValue $ExpectedChecksums[0].Checksum
-        $Results[1].Checksum | Should -Be -ExpectedValue $ExpectedChecksums[1].Checksum
+        $Results.Length | Should -Be $ExpectedChecksums.Length
+        $Results[0].Checksum | Should -Be $ExpectedChecksums[0].Checksum
+        $Results[1].Checksum | Should -Be $ExpectedChecksums[1].Checksum
     }
 }

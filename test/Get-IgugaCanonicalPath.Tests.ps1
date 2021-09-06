@@ -17,7 +17,7 @@ Describe 'Get-IgugaCanonicalPath' {
     It 'Pass when file exists' {
         $FilePath = Join-Path -Path $ModuleTestPath -ChildPath "Data\File.docx"
         $Expected = $FilePath.Replace("\", "/")
-        Get-IgugaCanonicalPath -Path $FilePath | Should -Be -ExpectedValue $Expected
+        Get-IgugaCanonicalPath -Path $FilePath | Should -Be $Expected
     }
 
     It 'Pass using NonExistentPath Windows' {
@@ -28,12 +28,18 @@ Describe 'Get-IgugaCanonicalPath' {
 
     It 'Pass using NonExistentPath Linux' {
         $FilePath = "/Test/This-File-Does-Not-Exists.txt";
-        Get-IgugaCanonicalPath -Path $FilePath -NonExistentPath | Should -Be -ExpectedValue $FilePath
+        Get-IgugaCanonicalPath -Path $FilePath -NonExistentPath | Should -Be $FilePath
     }
 
     It 'Pass case sensitive' {
         $FilePath = Join-Path -Path $ModuleTestPath -ChildPath "Data\file.docx"
         $Expected = $FilePath.Replace("\", "/")
-        Get-IgugaCanonicalPath -Path $FilePath | Should -Not -BeExactly -ExpectedValue $Expected
+        if ($PSVersionTable.PSVersion.Major -le 5) {
+            Get-IgugaCanonicalPath -Path $FilePath | Should -Not -BeExactly $Expected
+        } elseif ($IsWindows) {
+            Get-IgugaCanonicalPath -Path $FilePath | Should -Not -BeExactly $Expected
+        } elseif ($IsLinux) {
+            { Get-IgugaCanonicalPath -Path $FilePath } | Should -Throw
+        }
     }
 }
