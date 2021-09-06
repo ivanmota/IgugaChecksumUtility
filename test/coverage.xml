@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE report PUBLIC "-//JACOCO//DTD Report 1.1//EN" "report.dtd"[]>
-<report name="Pester (09/04/2021 15:20:18)">
-  <sessioninfo id="this" start="1630768817625" dump="1630768818642" />
+<report name="Pester (09/06/2021 09:12:48)">
+  <sessioninfo id="this" start="1630919566186" dump="1630919568522" />
   <package name="src">
     <class name="src/IgugaChecksumUtility" sourcefilename="IgugaChecksumUtility.psm1">
       <method name="&lt;script&gt;" desc="()" line="1">
@@ -144,13 +144,13 @@
       <counter type="CLASS" missed="1" covered="0" />
     </class>
     <class name="src/Private/Write-IgugaColorOutput" sourcefilename="Private/Write-IgugaColorOutput.ps1">
-      <method name="Write-IgugaColorOutput" desc="()" line="26">
-        <counter type="INSTRUCTION" missed="6" covered="0" />
-        <counter type="LINE" missed="6" covered="0" />
+      <method name="Write-IgugaColorOutput" desc="()" line="25">
+        <counter type="INSTRUCTION" missed="10" covered="0" />
+        <counter type="LINE" missed="7" covered="0" />
         <counter type="METHOD" missed="1" covered="0" />
       </method>
-      <counter type="INSTRUCTION" missed="6" covered="0" />
-      <counter type="LINE" missed="6" covered="0" />
+      <counter type="INSTRUCTION" missed="10" covered="0" />
+      <counter type="LINE" missed="7" covered="0" />
       <counter type="METHOD" missed="1" covered="0" />
       <counter type="CLASS" missed="1" covered="0" />
     </class>
@@ -246,14 +246,15 @@
       <counter type="CLASS" missed="1" covered="0" />
     </sourcefile>
     <sourcefile name="Private/Write-IgugaColorOutput.ps1">
-      <line nr="26" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="25" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="26" mi="4" ci="0" mb="0" cb="0" />
+      <line nr="27" mi="1" ci="0" mb="0" cb="0" />
       <line nr="28" mi="1" ci="0" mb="0" cb="0" />
-      <line nr="30" mi="1" ci="0" mb="0" cb="0" />
-      <line nr="33" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="32" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="34" mi="1" ci="0" mb="0" cb="0" />
       <line nr="35" mi="1" ci="0" mb="0" cb="0" />
-      <line nr="37" mi="1" ci="0" mb="0" cb="0" />
-      <counter type="INSTRUCTION" missed="6" covered="0" />
-      <counter type="LINE" missed="6" covered="0" />
+      <counter type="INSTRUCTION" missed="10" covered="0" />
+      <counter type="LINE" missed="7" covered="0" />
       <counter type="METHOD" missed="1" covered="0" />
       <counter type="CLASS" missed="1" covered="0" />
     </sourcefile>
@@ -321,8 +322,8 @@
       <counter type="METHOD" missed="1" covered="0" />
       <counter type="CLASS" missed="1" covered="0" />
     </sourcefile>
-    <counter type="INSTRUCTION" missed="93" covered="56" />
-    <counter type="LINE" missed="72" covered="37" />
+    <counter type="INSTRUCTION" missed="97" covered="56" />
+    <counter type="LINE" missed="73" covered="37" />
     <counter type="METHOD" missed="4" covered="2" />
     <counter type="CLASS" missed="4" covered="2" />
   </package>
@@ -561,8 +562,8 @@
     <counter type="METHOD" missed="1" covered="4" />
     <counter type="CLASS" missed="1" covered="4" />
   </package>
-  <counter type="INSTRUCTION" missed="213" covered="161" />
-  <counter type="LINE" missed="153" covered="122" />
+  <counter type="INSTRUCTION" missed="217" covered="161" />
+  <counter type="LINE" missed="154" covered="122" />
   <counter type="METHOD" missed="6" covered="10" />
   <counter type="CLASS" missed="6" covered="9" />
 </report>

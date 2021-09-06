@@ -30,16 +30,8 @@ Properties {
 
     # The local installation directory for the install task. Defaults to your home Modules location.
     [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
-    $InstallPath = Split-Path $profile.CurrentUserAllHosts -Parent
-
-    if ($PSVersionTable.PSVersion.Major -eq 5) {
-        # In Powershell 5 in Windows, we need to go one folder up
-        $InstallPath = Split-Path -Path $InstallPath -Parent
-        # and then enter on the "WindowsPowerShell" folder
-        $InstallPath = Join-Path -Path $InstallPath -ChildPath "WindowsPowerShell"
-    }
-
-    $InstallPath = Join-Path -Path $InstallPath -ChildPath "Modules\$ModuleName\$ModuleVersion"
+    $InstallPath = Join-Path -Path $($env:PSModulePath.Split([System.IO.Path]::PathSeparator)[0]) `
+        -ChildPath "$ModuleName\$ModuleVersion"
 
 
     # Default Locale used for help generation, defaults to en-US.
