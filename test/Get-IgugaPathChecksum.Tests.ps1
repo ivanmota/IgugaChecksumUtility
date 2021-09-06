@@ -32,7 +32,7 @@ Describe 'Get-IgugaPathChecksum' {
         $Results[0].Checksum | Should -Be $Checksum
     }
 
-    It 'Pass get depth 0' {
+    It 'Pass get directory depth 0' {
         $Path = Join-Path -Path $ModuleTestPath -ChildPath "Data"
         $Results = Get-IgugaPathChecksum -Path $Path -Depth 0 -Silent -UseAbsolutePath
         $Results.Length | Should -Be 2
