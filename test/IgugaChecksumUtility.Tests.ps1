@@ -46,7 +46,7 @@ Describe "Manifest" {
 	}
 
     It "Should contains a Tags (For the PSGallery)"{
-        $Script:Manifest.Tags.count | Should -BeGreaterThan 0
+        $Script:Manifest.Tags.count | Should -BeGreaterThan 0 -Because "the publish task will fail if there is no tags"
     }
 
 	It 'exports all public functions' {

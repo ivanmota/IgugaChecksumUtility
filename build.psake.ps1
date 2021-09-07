@@ -367,7 +367,6 @@ Task CoreGenerateFileCatalog -requiredVariables CatalogGenerationEnabled, Catalo
     Move-Item -LiteralPath $newFileCatalogParams.CatalogFilePath -Destination $ModuleOutDir
 }
 
-#Task Install -depends Build, BeforeInstall, CoreInstall, AfterInstall {
 Task Install -depends Build, BuildHelp, GenerateFileCatalog, BeforeInstall, CoreInstall, AfterInstall {
 }
 

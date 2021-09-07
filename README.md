@@ -2,10 +2,52 @@
 
 IgugaChecksumUtility is an utility made entirely in Powershell that allow you to generate or validate checksum for files or directories
 
-## Getting started
+## How to install this tool via Powershell Gallery
 
-To install the tool you will need to create a build first.
-For creating a build the projects has the following module dependencies:
+```powershell
+Install-Module -Name IgugaChecksumUtility
+```
+
+## Examples
+
+```powershell
+# Create the checksum for a single file, and output to console
+IgugaChecksumUtility -Mode Generate -Path "C:\Test\File.docx"
+```
+
+```powershell
+# Create a checksum for an entire directory using the SHA512 algorithm and export the checksum (SHA512SUMS.txt) to the root of the directory
+IgugaChecksumUtility -Mode Generate -Path "C:\Test\" -Algorithm SHA512 -OutFile
+```
+
+```powershell
+# Create a checksum for an entire directory using the SHA512 algorithm and export the checksum (SHA512SUMS.txt) to a specific path
+IgugaChecksumUtility -Mode Generate -Path "C:\Test\" -Algorithm SHA512 -OutFile -OutFilePath "C:\Checksums\SHA512SUMS.txt"
+```
+
+```powershell
+# Perform a validate operation on a checksum file
+IgugaChecksumUtility -Mode Validate -Path "C:\Test\SHA512SUMS.txt" -Algorithm SHA512
+```
+
+```powershell
+# Perform a compare operation on a file with a known hash
+IgugaChecksumUtility -Mode Compare -Path "C:\Test\File.docx" -Algorithm SHA1 -Hash ED1B042C1B986743C1E34EBB1FAF758549346B24
+```
+
+Please find below others function that this module export:
+
+1. Compare-IgugaFileHash
+2. Get-IgugaChecksum
+3. Get-IgugaPathChecksum
+4. Test-IgugaChecksumFile
+
+Find more info about those function on the `docs` folder
+
+
+## Getting started with this project
+
+This project was created with a [Plaster](https://github.com/PowerShellOrg/Plaster) template and has the following dependencies:
 
 [psake](https://github.com/psake/psake), the minimal required version `4.9.0`. To install it, run the following powershell command:
 
@@ -77,7 +119,7 @@ And finally we will need to run the folling powershell commands to import the mo
 Import-Module IgugaChecksumUtility
 ```
 
-## Install using the project Instructions
+## Install using the project task
 
 To install the tool using the project you will need to run the following powershell commands:
 
