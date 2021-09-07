@@ -7,7 +7,7 @@ IgugaChecksumUtility is an utility made entirely in Powershell that allow you to
 Install for all users (require admin permission)
 
 ```powershell
-Install-Module -Name IgugaChecksumUtility -SkipPublisherCheck
+Install-Module -Name IgugaChecksumUtility -Scope AllUsers -SkipPublisherCheck
 ```
 
 Install for current user
@@ -95,7 +95,7 @@ After install all required dependencies, make a clone of this project `git clone
 Invoke-psake build.psake.ps1 -taskList Build
 ```
 
-The above code will create the directory **Release** were the module build results will be stored.
+The above code will create the directory **Release** where the module build results will be stored.
 
 ## How to manually install this module
 
