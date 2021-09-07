@@ -8,7 +8,7 @@ schema: 2.0.0
 # Compare-IgugaFileHash
 
 ## SYNOPSIS
-Compare the file hash with a know hash
+Compare a file with a known hash
 
 ## SYNTAX
 
