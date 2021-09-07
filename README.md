@@ -60,7 +60,7 @@ This project was created with a [Plaster](https://github.com/PowerShellOrg/Plast
 [psake](https://github.com/psake/psake), the minimal required version `4.9.0`. To install it, run the following powershell command:
 
 ```powershell
-Install-Module -Name psake -Scope CurrentUser
+Install-Module -Name psake -Scope CurrentUser -SkipPublisherCheck
 ```
 
 [Pester](https://github.com/pester), the minimal required version is `5.3.0`. To install it, run the following powershell command:
@@ -79,13 +79,6 @@ Install-Module -Name platyPS -Scope CurrentUser
 
 ```powershell
 Install-Module -Name PSScriptAnalyzer -Scope CurrentUser
-```
-
-> On Windows by default only digitally signed Module are allowed to run. Because `psake` is not digitally signed you will not be allowed to run it.
-Only for DEV environment, we suggest you enable Execution Policy as Unrestricted for the current user. Run the following Powershell command to enable it:
-
-```powershell
-Set-ExecutionPolicy Unrestricted -Scope CurrentUser
 ```
 
 After install all required dependencies, make a clone of this project `git clone https://github.com/ivanmota/IgugaChecksumUtility.git` or just download it into a folder and run the following powershell command:
@@ -139,9 +132,9 @@ Import-Module IgugaChecksumUtility
 The above commands will:
 
 1. Create the build;
-2. Create the module name and the current version folders on the current Powershell Modules directory of the current user
+2. Create the module name and the current version folders on the current Powershell Modules directory of the current user;
 3. Copy all the `Release` folder content to it; and
-4. Proceed with the module import process
+4. Proceed with the module import process.
 
 ## Execution Policy issues on Windows
 
