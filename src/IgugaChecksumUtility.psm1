@@ -38,11 +38,10 @@ Import-LocalizedData -BindingVariable "Script:LocalizedData" -FileName IgugaChec
 
 # -------------------------- Load Script Files ----------------------------
 #
-$Classes  = Get-ChildItem -Path (Join-Path -Path $PSScriptRoot -ChildPath 'Classes\*.ps1') -Recurse
 $Public  = Get-ChildItem -Path (Join-Path -Path $PSScriptRoot -ChildPath 'Public\*.ps1') -Recurse
 
 #Excluding the classes, because they will be loaded by the manifest
-$ModuleScriptFiles = Get-ChildItem -Path $PSScriptRoot -Filter *.ps1 -Recurse -Exclude $Classes.Name | Where-Object { $_.Name -notlike "*.ps1xml" };
+$ModuleScriptFiles = Get-ChildItem -Path $PSScriptRoot -Filter *.ps1 | Where-Object { $_.Name -notlike "*.ps1xml" };
 
 foreach ($ScriptFile in $ModuleScriptFiles) {
     try {

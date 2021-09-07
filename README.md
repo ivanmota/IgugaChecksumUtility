@@ -7,13 +7,13 @@ IgugaChecksumUtility is an utility made entirely in Powershell that allow you to
 Install for all users (require admin permission)
 
 ```powershell
-Install-Module -Name IgugaChecksumUtility
+Install-Module -Name IgugaChecksumUtility -SkipPublisherCheck
 ```
 
 Install for current user
 
 ```powershell
-Install-Module -Name IgugaChecksumUtility -Scope CurrentUser
+Install-Module -Name IgugaChecksumUtility -Scope CurrentUser -SkipPublisherCheck
 ```
 
 ## Examples
