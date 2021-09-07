@@ -1,7 +1,7 @@
 function Compare-IgugaFileHash {
     <#
     .SYNOPSIS
-        Compare the file hash with a know hash
+        Compare a file with a known hash
     .DESCRIPTION
         Perform a compare operation on a file with a known hash
     .PARAMETER FilePath

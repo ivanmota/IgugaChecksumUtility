@@ -42,10 +42,10 @@ Please find below others function that this module export:
 3. Get-IgugaPathChecksum
 4. Test-IgugaChecksumFile
 
-Find more info about those function on the `docs` folder
+Find more info about those functions on the [docs](https://github.com/ivanmota/IgugaChecksumUtility/tree/master/docs/en-US) folder
 
 
-## Getting started with this project
+## How to get started with this project
 
 This project was created with a [Plaster](https://github.com/PowerShellOrg/Plaster) template and has the following dependencies:
 
@@ -89,7 +89,7 @@ Invoke-psake build.psake.ps1 -taskList Build
 
 The above code will create the directory **Release** were the module build results will be stored.
 
-## Install Manually Instructions
+## How to manually install this tool
 
 Run the following powershell command to discover where the Powershell Modules are installed
 
@@ -119,7 +119,7 @@ And finally we will need to run the folling powershell commands to import the mo
 Import-Module IgugaChecksumUtility
 ```
 
-## Install using the project task
+## How to install this tool via the project task
 
 To install the tool using the project you will need to run the following powershell commands:
 
@@ -133,7 +133,7 @@ The above commands will create the build, than create the module name and the cu
 
 ## Execution Policy issues on Windows
 
-If when you ran the Import-Module procedure you get some kind of error saying that you can't load the class bla bla bla, because is not digitaly signed, be aware that this is a default behavior of Powershell on Windows. By default all script or module that are not signed on Powershell Windows will be not allowed to run.
+If when you ran the Import-Module procedure you get some kind of error saying that you can't load the class bla bla bla, because is not digitaly signed, don't worry it is the default behavior of Powershell on Windows. By default all script or module that are not signed on Powershell Windows will be not allowed to run.
 
 You have to way to workaround this issue:
 
