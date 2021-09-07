@@ -3,8 +3,8 @@ BeforeAll {
     $SuppressImportModule = $true
 
     . $PSScriptRoot\Shared.ps1
-    . $PSScriptRoot\..\src\Classes\IgugaErrorClass.ps1
-    . $PSScriptRoot\..\src\Classes\IgugaValidateResultClass.ps1
+    . $PSScriptRoot\..\src\Classes\IgugaError.ps1
+    . $PSScriptRoot\..\src\Classes\IgugaValidateResult.ps1
     . $PSScriptRoot\..\src\Public\Get-IgugaChecksum.ps1
     . $PSScriptRoot\..\src\Public\Test-IgugaChecksumFile.ps1
 }

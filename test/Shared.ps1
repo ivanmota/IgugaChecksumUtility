@@ -3,6 +3,7 @@
 $ModuleManifestName = 'IgugaChecksumUtility.psd1'
 $ModuleManifestPath = "$PSScriptRoot\..\src\$ModuleManifestName"
 $ModuleTestPath = Resolve-Path "$PSScriptRoot\..\test"
+$ModuleSrcPath = Resolve-Path "$PSScriptRoot\..\src"
 
 if (!$SuppressImportModule) {
     # -Scope Global is needed when running tests from inside of psake, otherwise

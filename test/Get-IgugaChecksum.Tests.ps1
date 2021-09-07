@@ -3,7 +3,7 @@ BeforeAll {
     $SuppressImportModule = $true
 
     . $PSScriptRoot\Shared.ps1
-    . $PSScriptRoot\..\src\Classes\IgugaChecksumClass.ps1
+    . $PSScriptRoot\..\src\Classes\IgugaChecksum.ps1
     . $PSScriptRoot\..\src\Public\Get-IgugaChecksum.ps1
 }
 

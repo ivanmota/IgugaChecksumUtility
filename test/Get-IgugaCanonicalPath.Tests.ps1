@@ -3,7 +3,7 @@ BeforeAll {
     $SuppressImportModule = $true
 
     . $PSScriptRoot\Shared.ps1
-    . $PSScriptRoot\..\src\Classes\IgugaErrorClass.ps1
+    . $PSScriptRoot\..\src\Classes\IgugaError.ps1
     . $PSScriptRoot\..\src\Private\Get-IgugaCanonicalPath.ps1
 }
 

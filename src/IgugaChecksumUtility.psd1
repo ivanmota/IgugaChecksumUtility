@@ -58,9 +58,9 @@ Description = 'Generates and validate checksums for files or directories'
 
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
 ScriptsToProcess = @(
-    'Classes\IgugaErrorClass.ps1',
-    'Classes\IgugaChecksumClass.ps1'
-    'Classes\IgugaValidateResultClass.ps1'
+    'Classes\IgugaError.ps1',
+    'Classes\IgugaChecksum.ps1'
+    'Classes\IgugaValidateResult.ps1'
 )
 
 # Type files (.ps1xml) to be loaded when importing this module
@@ -73,16 +73,16 @@ ScriptsToProcess = @(
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-# FunctionsToExport = '*'
-
-# Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
-CmdletsToExport = @(
+FunctionsToExport =  @(
     'Compare-IgugaFileHash',
     'Get-IgugaChecksum',
     'Get-IgugaPathChecksum',
     'Test-IgugaChecksumFile',
     'IgugaChecksumUtility'
 )
+
+# Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
+# CmdletsToExport = @()
 
 # Variables to export from this module
 # VariablesToExport = '*'
@@ -105,7 +105,7 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        # Tags = @()
+        Tags = @( 'checksum', 'MD5', 'SHA1', 'SHA256', 'SHA512', 'hash')
 
         # A URL to the license for this module.
         LicenseUri = 'https://github.com/ivanmota/IgugaChecksumUtility/blob/master/LICENSE.txt'

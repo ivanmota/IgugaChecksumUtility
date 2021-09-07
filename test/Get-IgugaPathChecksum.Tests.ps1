@@ -3,9 +3,9 @@ BeforeAll {
     $SuppressImportModule = $true
 
     . $PSScriptRoot\Shared.ps1
-    . $PSScriptRoot\..\src\Classes\IgugaErrorClass.ps1
-    . $PSScriptRoot\..\src\Classes\IgugaChecksumClass.ps1
-    . $PSScriptRoot\..\src\Classes\IgugaValidateResultClass.ps1
+    . $PSScriptRoot\..\src\Classes\IgugaError.ps1
+    . $PSScriptRoot\..\src\Classes\IgugaChecksum.ps1
+    . $PSScriptRoot\..\src\Classes\IgugaValidateResult.ps1
     . $PSScriptRoot\..\src\Private\Get-IgugaCanonicalPath.ps1
     . $PSScriptRoot\..\src\Private\Get-IgugaRelativePath.ps1
     . $PSScriptRoot\..\src\Private\Test-IgugaLikeAny.ps1
