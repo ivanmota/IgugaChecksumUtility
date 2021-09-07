@@ -12,7 +12,7 @@
 RootModule = 'IgugaChecksumUtility.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.0.4'
+ModuleVersion = '1.0.5'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -117,7 +117,7 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-        ReleaseNotes = 'Fix some load script issues'
+        # ReleaseNotes = ''
 
     } # End of PSData hashtable
 

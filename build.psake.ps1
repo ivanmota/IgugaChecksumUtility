@@ -463,12 +463,12 @@ Task CorePublish -requiredVariables SettingsPath, ModuleOutDir {
 
     # If an alternate repository is specified, set the appropriate parameter.
     if ($PublishRepository) {
-        $publishParams['Repository'] = $PublishRepository
+        $publishParams.Repository = $PublishRepository
     }
 
     # Consider not using -ReleaseNotes parameter when Update-ModuleManifest has been fixed.
     if ($ReleaseNotesPath) {
-        $publishParams['ReleaseNotes'] = @(Get-Content $ReleaseNotesPath)
+        $publishParams.ReleaseNotes = @(Get-Content $ReleaseNotesPath)
     }
 
     "Calling Publish-Module..."
