@@ -91,7 +91,7 @@ function Write-IgugaReporSummary() {
         "Description: $($MyInvocation.MyCommand.Module.Description)",
         "Project Url: $($MyInvocation.MyCommand.Module.ProjectUri)",
         "Author: $($MyInvocation.MyCommand.Module.Author)",
-        "Started at:  $((Get-Date).ToString("yyyy-dd-MM HH:mm:ss"))",
+        "Started at: $((Get-Date).ToString("yyyy-dd-MM HH:mm:ss"))",
         ""
     );
 
