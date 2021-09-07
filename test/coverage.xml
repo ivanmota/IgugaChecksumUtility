@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE report PUBLIC "-//JACOCO//DTD Report 1.1//EN" "report.dtd"[]>
-<report name="Pester (09/07/2021 18:21:45)">
-  <sessioninfo id="this" start="1631038903224" dump="1631038905525" />
+<report name="Pester (09/07/2021 18:29:52)">
+  <sessioninfo id="this" start="1631039389875" dump="1631039392206" />
   <package name="src">
     <class name="src/IgugaChecksumUtility" sourcefilename="IgugaChecksumUtility.psm1">
       <method name="&lt;script&gt;" desc="()" line="3">
