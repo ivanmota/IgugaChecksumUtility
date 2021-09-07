@@ -156,7 +156,7 @@ For more information, check the [Execution Policy Page](https://docs.microsoft.c
 
 ### Solution 2
 
-Digitally sign the Module using a self-signed Certificate. Please find bellow all the steps that you will need to digitally sign the module on Windows 10:
+Digitally sign this Module using a self-signed Certificate. Please find bellow all the steps that you will need to digitally sign this module on Windows 10:
 
 #### Step 1
 

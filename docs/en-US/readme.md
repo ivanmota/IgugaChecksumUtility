@@ -1,4 +1,4 @@
-# Function exported with this module
+# Functions exported with this module
 
 [Compare-IgugaFileHash](https://github.com/ivanmota/IgugaChecksumUtility/blob/master/docs/en-US/Compare-IgugaFileHash.md) - Compare a file with a known hash
 

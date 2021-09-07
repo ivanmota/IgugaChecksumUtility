@@ -1,1 +1,1 @@
-[English](https://github.com/ivanmota/IgugaChecksumUtility/tree/master/docs/en-US)
+[English version](https://github.com/ivanmota/IgugaChecksumUtility/tree/master/docs/en-US)
