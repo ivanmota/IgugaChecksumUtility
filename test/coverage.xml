@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE report PUBLIC "-//JACOCO//DTD Report 1.1//EN" "report.dtd"[]>
-<report name="Pester (09/07/2021 12:24:12)">
-  <sessioninfo id="this" start="1631017451694" dump="1631017452798" />
+<report name="Pester (09/07/2021 13:00:40)">
+  <sessioninfo id="this" start="1631019637870" dump="1631019640416" />
   <package name="src">
     <class name="src/IgugaChecksumUtility" sourcefilename="IgugaChecksumUtility.psm1">
       <method name="&lt;script&gt;" desc="()" line="3">
@@ -38,14 +38,14 @@
   <package name="src/Classes">
     <class name="src/Classes/IgugaChecksum" sourcefilename="Classes/IgugaChecksum.ps1">
       <method name="IgugaChecksum" desc="()" line="7">
-        <counter type="INSTRUCTION" missed="3" covered="0" />
-        <counter type="LINE" missed="3" covered="0" />
-        <counter type="METHOD" missed="1" covered="0" />
+        <counter type="INSTRUCTION" missed="0" covered="3" />
+        <counter type="LINE" missed="0" covered="3" />
+        <counter type="METHOD" missed="0" covered="1" />
       </method>
-      <counter type="INSTRUCTION" missed="3" covered="0" />
-      <counter type="LINE" missed="3" covered="0" />
-      <counter type="METHOD" missed="1" covered="0" />
-      <counter type="CLASS" missed="1" covered="0" />
+      <counter type="INSTRUCTION" missed="0" covered="3" />
+      <counter type="LINE" missed="0" covered="3" />
+      <counter type="METHOD" missed="0" covered="1" />
+      <counter type="CLASS" missed="0" covered="1" />
     </class>
     <class name="src/Classes/IgugaError" sourcefilename="Classes/IgugaError.ps1">
       <method name="PathNotFound" desc="()" line="5">
@@ -75,13 +75,13 @@
       <counter type="CLASS" missed="0" covered="1" />
     </class>
     <sourcefile name="Classes/IgugaChecksum.ps1">
-      <line nr="7" mi="1" ci="0" mb="0" cb="0" />
-      <line nr="8" mi="1" ci="0" mb="0" cb="0" />
-      <line nr="9" mi="1" ci="0" mb="0" cb="0" />
-      <counter type="INSTRUCTION" missed="3" covered="0" />
-      <counter type="LINE" missed="3" covered="0" />
-      <counter type="METHOD" missed="1" covered="0" />
-      <counter type="CLASS" missed="1" covered="0" />
+      <line nr="7" mi="0" ci="1" mb="0" cb="0" />
+      <line nr="8" mi="0" ci="1" mb="0" cb="0" />
+      <line nr="9" mi="0" ci="1" mb="0" cb="0" />
+      <counter type="INSTRUCTION" missed="0" covered="3" />
+      <counter type="LINE" missed="0" covered="3" />
+      <counter type="METHOD" missed="0" covered="1" />
+      <counter type="CLASS" missed="0" covered="1" />
     </sourcefile>
     <sourcefile name="Classes/IgugaError.ps1">
       <line nr="5" mi="0" ci="1" mb="0" cb="0" />
@@ -105,10 +105,10 @@
       <counter type="METHOD" missed="0" covered="1" />
       <counter type="CLASS" missed="0" covered="1" />
     </sourcefile>
-    <counter type="INSTRUCTION" missed="3" covered="10" />
-    <counter type="LINE" missed="3" covered="10" />
-    <counter type="METHOD" missed="1" covered="3" />
-    <counter type="CLASS" missed="1" covered="2" />
+    <counter type="INSTRUCTION" missed="0" covered="13" />
+    <counter type="LINE" missed="0" covered="13" />
+    <counter type="METHOD" missed="0" covered="4" />
+    <counter type="CLASS" missed="0" covered="3" />
   </package>
   <package name="src/Private">
     <class name="src/Private/Get-IgugaCanonicalPath" sourcefilename="Private/Get-IgugaCanonicalPath.ps1">
@@ -577,8 +577,8 @@
     <counter type="METHOD" missed="1" covered="4" />
     <counter type="CLASS" missed="1" covered="4" />
   </package>
-  <counter type="INSTRUCTION" missed="236" covered="159" />
-  <counter type="LINE" missed="171" covered="120" />
-  <counter type="METHOD" missed="7" covered="9" />
-  <counter type="CLASS" missed="7" covered="8" />
+  <counter type="INSTRUCTION" missed="233" covered="162" />
+  <counter type="LINE" missed="168" covered="123" />
+  <counter type="METHOD" missed="6" covered="10" />
+  <counter type="CLASS" missed="6" covered="9" />
 </report>
