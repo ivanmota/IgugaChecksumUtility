@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE report PUBLIC "-//JACOCO//DTD Report 1.1//EN" "report.dtd"[]>
-<report name="Pester (09/07/2021 13:03:04)">
-  <sessioninfo id="this" start="1631019783391" dump="1631019784718" />
+<report name="Pester (09/07/2021 14:27:44)">
+  <sessioninfo id="this" start="1631024863270" dump="1631024864631" />
   <package name="src">
     <class name="src/IgugaChecksumUtility" sourcefilename="IgugaChecksumUtility.psm1">
       <method name="&lt;script&gt;" desc="()" line="3">
-        <counter type="INSTRUCTION" missed="16" covered="0" />
-        <counter type="LINE" missed="10" covered="0" />
+        <counter type="INSTRUCTION" missed="14" covered="0" />
+        <counter type="LINE" missed="9" covered="0" />
         <counter type="METHOD" missed="1" covered="0" />
       </method>
-      <counter type="INSTRUCTION" missed="16" covered="0" />
-      <counter type="LINE" missed="10" covered="0" />
+      <counter type="INSTRUCTION" missed="14" covered="0" />
+      <counter type="LINE" missed="9" covered="0" />
       <counter type="METHOD" missed="1" covered="0" />
       <counter type="CLASS" missed="1" covered="0" />
     </class>
@@ -18,20 +18,19 @@
       <line nr="3" mi="1" ci="0" mb="0" cb="0" />
       <line nr="37" mi="1" ci="0" mb="0" cb="0" />
       <line nr="41" mi="2" ci="0" mb="0" cb="0" />
-      <line nr="42" mi="2" ci="0" mb="0" cb="0" />
-      <line nr="45" mi="3" ci="0" mb="0" cb="0" />
-      <line nr="47" mi="1" ci="0" mb="0" cb="0" />
-      <line nr="49" mi="2" ci="0" mb="0" cb="0" />
-      <line nr="50" mi="1" ci="0" mb="0" cb="0" />
-      <line nr="53" mi="2" ci="0" mb="0" cb="0" />
-      <line nr="57" mi="1" ci="0" mb="0" cb="0" />
-      <counter type="INSTRUCTION" missed="16" covered="0" />
-      <counter type="LINE" missed="10" covered="0" />
+      <line nr="44" mi="3" ci="0" mb="0" cb="0" />
+      <line nr="46" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="48" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="49" mi="1" ci="0" mb="0" cb="0" />
+      <line nr="52" mi="2" ci="0" mb="0" cb="0" />
+      <line nr="56" mi="1" ci="0" mb="0" cb="0" />
+      <counter type="INSTRUCTION" missed="14" covered="0" />
+      <counter type="LINE" missed="9" covered="0" />
       <counter type="METHOD" missed="1" covered="0" />
       <counter type="CLASS" missed="1" covered="0" />
     </sourcefile>
-    <counter type="INSTRUCTION" missed="16" covered="0" />
-    <counter type="LINE" missed="10" covered="0" />
+    <counter type="INSTRUCTION" missed="14" covered="0" />
+    <counter type="LINE" missed="9" covered="0" />
     <counter type="METHOD" missed="1" covered="0" />
     <counter type="CLASS" missed="1" covered="0" />
   </package>
@@ -577,8 +576,8 @@
     <counter type="METHOD" missed="1" covered="4" />
     <counter type="CLASS" missed="1" covered="4" />
   </package>
-  <counter type="INSTRUCTION" missed="233" covered="162" />
-  <counter type="LINE" missed="168" covered="123" />
+  <counter type="INSTRUCTION" missed="231" covered="162" />
+  <counter type="LINE" missed="167" covered="123" />
   <counter type="METHOD" missed="6" covered="10" />
   <counter type="CLASS" missed="6" covered="9" />
 </report>

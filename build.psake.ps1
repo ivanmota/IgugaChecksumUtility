@@ -330,7 +330,7 @@ Task CoreGenerateFileCatalog -requiredVariables CatalogGenerationEnabled, Catalo
         return
     }
 
-    $catalogFilePath = "$ModuleOutDir\$ModuleName.cat"
+    $catalogFilePath = "$OutDir\$ModuleName.cat"
 
     $newFileCatalogParams = @{
         Path = $ModuleOutDir
