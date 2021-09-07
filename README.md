@@ -138,9 +138,9 @@ The above commands will:
 
 ## Execution Policy issues on Windows
 
-If when you ran the Import-Module procedure you get some kind of error saying that you can't load the class bla bla bla, because is not digitaly signed, don't worry it is the default behavior of Powershell on Windows. By default all script or module that are not signed on Powershell Windows will be not allowed to run.
+If when you ran the Import-Module procedure you get an error saying that you can't load the class bla bla bla, because is not digitally signed, don't worry, it is the default behaviour of Powershell on Windows. By default, all script or module that are not signed on Powershell Windows will be not allowed to run.
 
-You have to way to workaround this issue:
+You have two ways to work around this issue:
 
 ### Solution 1
 
@@ -150,68 +150,66 @@ Remove the restriction (which is not recommended), running the following code:
 Set-ExecutionPolicy Unrestricted -Scope CurrentUser
 ```
 
-The above code will ask your confirmation whether you want to remove the restriction for the current user or not. You should responde "Y" (yes)
+The above code will ask your confirmation whether you want to remove the restriction for the current user or not. You should respond "Y" (yes)
 
 For more information, check the [Execution Policy Page](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-5.1)
 
 ### Solution 2
 
-Digitally sign the Module using a self-assigned Certificate.
-Please find bellow all the steps that you will need to digitally sign the module on Windows 10:
+Digitally sign the Module using a self-signed Certificate. Please find bellow all the steps that you will need to digitally sign the module on Windows 10:
 
 #### Step 1
 
-Lets create a self-sign certificate, using powershell. We will create a certificate with the DnsName `powershell.igugachecksumutility.local` and with 10 years of expiration date for the current user. Run the following powershell command:
-
-```powershell
-New-SelfSignedCertificate -DnsName powershell.igugachecksumutility.local -CertStoreLocation Cert:\CurrentUser\My\ -Type Codesigning -NotAfter (Get-Date).AddYears(10)
-```
-
-You can find your certificate in your certificate store (Personal -> Certificates), more in next setp.
+**Open PowerShell as administrator** on your computer.
 
 #### Step 2
 
-Export the just created certificate to a folder. Run the command to open the `Manage Computer Certificates` tool.
+Copy the command below and run it in PowerShell. This command uses the `New-SelfSignedCertificate` cmdlet to create a new code signing certificate with 10 years expiration date. The certificate’s name is __Iguga Services__ inside the local computer’s Personal certificate store.
+
+> The `New-SelfSignedCertificate` cmdlet only supports creating certificates in the current user’s personal certificate store (cert:\CurrentUser\My) or the local machine’s personal certificate store (cert:\LocalMachine\My). Certificates in cert:\LocalMachine\My are available computer-wide.
+
+The command also stores the certificate object to the `$authenticode` variable for use in the next step.
 
 ```powershell
-certmgr.msc
+# Generate a self-signed Authenticode certificate in the local computer's personal certificate store.
+$authenticode = New-SelfSignedCertificate -Subject "Iguga Services" -CertStoreLocation Cert:\LocalMachine\My -Type CodeSigningCert -NotAfter (Get-Date).AddYears(10)
 ```
-
-Then on the folder tree `Personal->Certificates` find the certificate issued to `powershell.igugachecksumutility.local`. With the mouse right click, click on the `All Tasks -> Export...` menu, then:
-
-1. Click `Next`
-2. Select `No, do not export the private key` and then click `Next`
-3. Select `DER encoded binary X.509 (.CER)` and then click `Next`
-4. Choose where to save the file with the name `powershell.igugachecksumutility.local` on your computer and then click `Next`
-5. Finally click `Finish`
 
 #### Step 3
 
-Import the certificate in Trusted Root Certification Autorities and Trusted Publisher
+Next, to make your computer trust the new certificate you’ve created, add the self-signed certificate to the computer’s __Trusted Root Certification Authority__ and __Trusted Publishers__ certificate store. To do so, copy the code below and run it in PowerShell.
 
-With the `Manage Computer Certificates` tool still opened, with the mouse right click on the left side bar folder tree `Trusted Root Certification Authorities->Certificates`, click on the menu `All Tasks -> Import...` and then:
+```powershell
+# Add the self-signed Authenticode certificate to the computer's root certificate store.
+## Create an object to represent the LocalMachine\Root certificate store.
+$rootStore = [System.Security.Cryptography.X509Certificates.X509Store]::new("Root","LocalMachine")
+## Open the root certificate store for reading and writing.
+$rootStore.Open("ReadWrite")
+## Add the certificate stored in the $authenticode variable.
+$rootStore.Add($authenticode)
+## Close the root certificate store.
+$rootStore.Close()
 
-1. Click `Next`
-2. Select the certificate exported on the previous step and then click `Next`
-3. Select `Place all certificates in the following store`, and be sure that the value of the `Certificate store:` is `Trusted Root Certification Autorities` and then click `Next`
-4. Finally click `Finish` and accept the Security Warning by click on the button `Yes`
-
-With the `Manage Computer Certificates` tool still opened, with the mouse right click on the left side bar folder tree `Trusted Publisher->Certificates`, click on the menu `All Tasks -> Import...` and then:
-
-1. Click `Next`
-2. Select the certificate exported on the previous step and then click `Next`
-3. Select `Place all certificates in the following store`, and be sure that the value of the `Certificate store:` is `Trusted Publishers` and then click `Next`
-4. Finally click `Finish`
+# Add the self-signed Authenticode certificate to the computer's trusted publishers certificate store.
+## Create an object to represent the LocalMachine\TrustedPublisher certificate store.
+$publisherStore = [System.Security.Cryptography.X509Certificates.X509Store]::new("TrustedPublisher","LocalMachine")
+## Open the TrustedPublisher certificate store for reading and writing.
+$publisherStore.Open("ReadWrite")
+## Add the certificate stored in the $authenticode variable.
+$publisherStore.Add($authenticode)
+## Close the TrustedPublisher certificate store.
+$publisherStore.Close()
+```
 
 #### Step 4
 
 On the module project, edit the file `build.settings.ps1`:
 
 1. Sets the variable `$ScriptSigningEnabled` value to `$true`
-2. Sets the variable `$CertSubjectName` value to `"powershell.igugachecksumutility.local"`
-3. Sets the variable `$CertPath` value to `"Cert:\CurrentUser\My"`
+2. Sets the variable `$CertSubjectName` value to `"Iguga Services"`
+3. Sets the variable `$CertPath` value to `"Cert:\LocalMachine\My"`
 4. Finally save the file
 
 #### Step 5
 
-Run the build again and follow the steps to install the Module again.
+Run the build again and follow the steps to install this module again.
