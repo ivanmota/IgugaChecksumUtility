@@ -4,8 +4,16 @@ IgugaChecksumUtility is an utility made entirely in Powershell that allow you to
 
 ## How to install this module via Powershell Gallery
 
+Install for all users (require admin permission)
+
 ```powershell
 Install-Module -Name IgugaChecksumUtility
+```
+
+Install for current user
+
+```powershell
+Install-Module -Name IgugaChecksumUtility -Scope CurrentUser
 ```
 
 ## Examples
