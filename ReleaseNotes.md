@@ -1,1 +1,1 @@
-Fix an remaing issue with the authenticode signature of the file 'IgugaChecksumUtility.cat'
+Fix an issue loading the scripts
