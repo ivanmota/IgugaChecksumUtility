@@ -39,6 +39,11 @@ IgugaChecksumUtility -Mode Validate -Path "C:\Test\SHA512SUMS.txt" -Algorithm SH
 ```
 
 ```powershell
+# Perform a validate operation on a checksum file when the paths inside the file being validated is located on a different path
+IgugaChecksumUtility -Mode Validate -Path "\\server1\checksums\apps\SHA256SUMS.txt" -BasePath "C:\Apps" -Algorithm SHA512
+```
+
+```powershell
 # Perform a compare operation on a file with a known hash
 IgugaChecksumUtility -Mode Compare -Path "C:\Test\File.docx" -Algorithm SHA1 -Hash ED1B042C1B986743C1E34EBB1FAF758549346B24
 ```
@@ -51,7 +56,6 @@ Please find below others function that this module export:
 4. Test-IgugaChecksumFile
 
 Find more info about those functions on the [docs](https://github.com/ivanmota/IgugaChecksumUtility/tree/master/docs) folder
-
 
 ## How to get started with this project
 
