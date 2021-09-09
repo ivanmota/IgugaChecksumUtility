@@ -15,7 +15,7 @@ RootModule = 'IgugaChecksumUtility.psm1'
 ModuleVersion = '1.0.6'
 
 # Supported PSEditions
-# CompatiblePSEditions = @()
+CompatiblePSEditions = @('PSEdition_Desktop', 'PSEdition_Core', 'Windows', 'Linux', 'MacOS')
 
 # ID used to uniquely identify this module
 GUID = '5ab60a17-55ca-4df4-b409-d656a605c26e'
@@ -105,7 +105,7 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = @( 'checksum', 'MD5', 'SHA1', 'SHA256', 'SHA512', 'hash')
+        Tags = @( 'checksum', 'MD5', 'SHA1', 'SHA256', 'SHA512', 'integrity')
 
         # A URL to the license for this module.
         LicenseUri = 'https://github.com/ivanmota/IgugaChecksumUtility/blob/master/LICENSE.txt'
