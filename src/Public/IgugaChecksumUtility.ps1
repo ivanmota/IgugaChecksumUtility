@@ -8,25 +8,28 @@ function IgugaChecksumUtility {
         Sets the operation mode
     .PARAMETER Path
         Sets the path to a given file or directory
+    .PARAMETER BasePath
+        Used with Validate mode, sets the base path. This parameter is usefull when the paths inside of the checksum file are
+        relative and the file being validated is located in a not related path.
     .PARAMETER Algorithm
         Sets the hashing algorithm to be used in the checksum operation. The allowed algotithms are: MD5, SHA1, SHA256, SHA384 and SHA512
     .PARAMETER Hash
-        Use with Compare mode, sets the specific previously known hash
+        Used with Compare mode, sets the specific previously known hash
     .PARAMETER Filter
-        Use with Generate mode when the path is a directory, specifies a filter to qualify the Path parameter. Example: '*.txt'
+        Used with Generate mode when the path is a directory, specifies a filter to qualify the Path parameter. Example: '*.txt'
     .PARAMETER Exclude
-        Use with Generate mode when the path is a directory, specifies an array of one or more string patterns to be matched as the cmdlet gets child items.
+        Used with Generate mode when the path is a directory, specifies an array of one or more string patterns to be matched as the cmdlet gets child items.
         Any matching item is excluded from the output. Enter a path element or pattern, such as *.txt or A*. Wildcard characters are accepted
     .PARAMETER Depth
-        Use with Generate mode when the path is a directory, allow you to limit the recursion to X levels.
+        Used with Generate mode when the path is a directory, allow you to limit the recursion to X levels.
         For example, -Depth 2 includes the Path parameter's directory, first level of subdirectories, and second level of subdirectories.
     .PARAMETER OutFile
-        Use with Generate mode, sets whether it will generate a checksum file or not
+        Used with Generate mode, sets whether it will generate a checksum file or not
     .PARAMETER OutFilePath
-        Use with Generate mode, sets the path of the generated checksum file.
+        Used with Generate mode, sets the path of the generated checksum file.
         If this parameter is not provided the default name will be "{Algorithm}SUMS.txt" and will be stored on the Path directory
     .PARAMETER UseAbsolutePath
-        Use with Generate mode, sets whether the checksum file path should be absolute or not
+        Used with Generate mode, sets whether the checksum file path should be absolute or not
     .PARAMETER OutputFilePath
         Sets the file path to export the output. If the output file path is not provided the output will be printed to the console
     .PARAMETER Silent
@@ -56,6 +59,9 @@ function IgugaChecksumUtility {
         HelpMessage = "The path to a given file or directory")]
         [string]
         $Path,
+
+        [string]
+        $BasePath,
 
         [ValidateSet("MD5", "SHA1", "SHA256", "SHA384", "SHA512")]
         [string]
@@ -105,7 +111,7 @@ function IgugaChecksumUtility {
 
     if ($Mode -eq "Validate") {
         try {
-            $Results = Test-IgugaChecksumFile -FilePath $Path -Algorithm $Algorithm -Silent:$Silent
+            $Results = Test-IgugaChecksumFile -FilePath $Path -BasePath $BasePath -Algorithm $Algorithm -Silent:$Silent
             $Script:TotalOfItems = $Results.Length
             foreach ($Result in $Results) {
                 switch ($Result.Status) {
@@ -124,19 +130,14 @@ function IgugaChecksumUtility {
                         Write-IgugaReportContent -Text "[-] $($Script:LocalizedData.ErrorUtilityValidateFileNotFound -f $Result.FilePath)" -ForegroundColor Red -OutputFilePath $OutputFilePath -Silent:$Silent
                         break;
                     }
-                    default {}
                 }
             }
         } catch {
-            if ($_.CategoryInfo -eq [ErrorCategory]::ObjectNotFound) {
-                Write-Error -Message "[-] $($Script:LocalizedData.ErrorUtilityPathNotValidFile -f $Mode, $Path)" -Category ObjectNotFound
-            } else {
-                Write-Error -Message "[-] $($_.Exception)"
-            }
+            Write-Error -Message "[-] $($_.Exception)"
         }
     } elseif ($Mode -eq "Compare") {
         try {
-            $Results = Compare-IgugaFileHash -FilePath $Path -Algorithm $Algorithm -Hash $Hash -Silent:$Silent
+            $Result = Compare-IgugaFileHash -FilePath $Path -Algorithm $Algorithm -Hash $Hash -Silent:$Silent
             $Script:TotalOfItems = 1
             switch ($Result.Status) {
                 "PASS" {
@@ -146,10 +147,9 @@ function IgugaChecksumUtility {
                 }
                 "FAIL" {
                     $Script:ReportItemsInvalid++
-                    Write-IgugaReportContent -Text $($Script:LocalizedData.ValidationFailed -f $Result.FilePath, $Result.Hash, $Result.ExpectedHash) -ForegroundColor Green -OutputFilePath $OutputFilePath -Silent:$Silent
+                    Write-IgugaReportContent -Text $($Script:LocalizedData.ValidationFailed -f $Result.FilePath, $Result.Hash, $Result.ExpectedHash) -ForegroundColor Red -OutputFilePath $OutputFilePath -Silent:$Silent
                     break;
                 }
-                default {}
             }
         } catch {
             if ($_.CategoryInfo -eq [ErrorCategory]::ObjectNotFound) {

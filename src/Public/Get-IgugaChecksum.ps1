@@ -33,8 +33,8 @@ function Get-IgugaChecksum() {
         $AlternactiveFilePath = ""
     )
 
-    $WindowsDirSep = "\"
-    $LinuxDirSep = "/"
+    $WindowsDirSep = [System.IO.Path]::DirectorySeparatorChar
+    $LinuxDirSep = [System.IO.Path]::AltDirectorySeparatorChar
 
     $FileResults = Get-FileHash -LiteralPath $FilePath -Algorithm $Algorithm
 
@@ -43,6 +43,10 @@ function Get-IgugaChecksum() {
     }
 
     $AlternactiveFilePath = $AlternactiveFilePath.Replace($WindowsDirSep, $LinuxDirSep)
+
+    if ($AlternactiveFilePath.StartsWith(".$LinuxDirSep")) {
+        $AlternactiveFilePath = $AlternactiveFilePath.Substring(".$LinuxDirSep".Length)
+    }
 
     $Checksum = $FileResults.Hash + "  " + $AlternactiveFilePath;
 

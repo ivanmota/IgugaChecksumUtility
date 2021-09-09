@@ -31,6 +31,17 @@ Describe 'Get-IgugaCanonicalPath' {
         Get-IgugaCanonicalPath -Path $FilePath -NonExistentPath | Should -Be $FilePath
     }
 
+    # It 'Should throw an error when you only pass the unc path hostname' {
+    #     $Path = "\\server1";
+    #     { Get-IgugaCanonicalPath -Path $Path } | Should -Throw
+    # }
+
+    # It 'Should process UNC Path' {
+    #     $Path = "\\server1\checksums\";
+    #     $ExpectedPath = "//server1/checksums"
+    #     Get-IgugaCanonicalPath -Path $Path | Should -Be $ExpectedPath
+    # }
+
     It 'Pass case sensitive' {
         $FilePath = Join-Path -Path $ModuleTestPath -ChildPath "Data\file.docx"
         $Expected = $FilePath.Replace("\", "/")

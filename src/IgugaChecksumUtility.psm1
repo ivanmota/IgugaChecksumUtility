@@ -38,11 +38,12 @@ Import-LocalizedData -BindingVariable "Script:LocalizedData" -FileName IgugaChec
 
 # -------------------------- Load Script Files ----------------------------
 #
+$Classes  = @( Get-ChildItem -Path "$PSScriptRoot\Classes\*.ps1" -ErrorAction SilentlyContinue )
 $Public  = @( Get-ChildItem -Path "$PSScriptRoot\Public\*.ps1" -ErrorAction SilentlyContinue )
 $Private = @( Get-ChildItem -Path "$PSScriptRoot\Private\*.ps1" -ErrorAction SilentlyContinue )
 
 #Dot source the files
-Foreach($Import in @($Public + $Private))
+Foreach($Import in @($Classes + $Private + $Public))
 {
     Try
     {

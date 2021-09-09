@@ -45,8 +45,8 @@ function Get-IgugaRelativePath() {
         }
     }
 
-    $WindowsDirSep = "\"
-    $LinuxDirSep = "/"
+    $WindowsDirSep = [System.IO.Path]::DirectorySeparatorChar
+    $LinuxDirSep = [System.IO.Path]::AltDirectorySeparatorChar
 
     $RelativeTo = $RelativeTo.Replace($WindowsDirSep, $LinuxDirSep).TrimEnd($LinuxDirSep)
     $Path = $Path.Replace($WindowsDirSep, $LinuxDirSep).TrimEnd($LinuxDirSep)

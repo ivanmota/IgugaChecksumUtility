@@ -6,6 +6,9 @@ function Test-IgugaChecksumFile {
         Validate a give checksum file
     .PARAMETER FilePath
         Sets the path to a given checksum file
+    .PARAMETER BasePath
+        Used with Validate mode, sets the base path. This parameter is usefull when the paths inside of the checksum file are
+        relative and the file being validated is located in a not related path.
     .PARAMETER Algorithm
         Sets the hashing algorithm to be used in the checksum validation. The allowed algotithms are: MD5, SHA1, SHA256, SHA384 and SHA512
     .PARAMETER Silent
@@ -23,6 +26,9 @@ function Test-IgugaChecksumFile {
         [string]
         $FilePath,
 
+        [string]
+        $BasePath,
+
         [ValidateSet("MD5", "SHA1", "SHA256", "SHA384", "SHA512")]
         [string]
         $Algorithm = "SHA256",
@@ -33,8 +39,14 @@ function Test-IgugaChecksumFile {
 
     $Results = @();
 
-    $WindowsDirSep = "\"
-    $LinuxDirSep = "/"
+    $WindowsDirSep = [System.IO.Path]::DirectorySeparatorChar
+    $LinuxDirSep = [System.IO.Path]::AltDirectorySeparatorChar
+
+    if ($PSBoundParameters.ContainsKey("BasePath") -and -not([string]::IsNullOrWhiteSpace($BasePath))) {
+        if (-not(Test-Path -LiteralPath $BasePath -PathType Container)) {
+            throw [IgugaError]::PathNotFound($Script:LocalizedData.ErrorBasePathNotFound, $BasePath)
+        }
+    }
 
     if (Test-Path -LiteralPath $FilePath -PathType Leaf) {
         $runningChar = "/"
@@ -50,8 +62,11 @@ function Test-IgugaChecksumFile {
 
             # Check if the file path is relative
             if (-not([System.IO.Path]::IsPathRooted($CurrentStoredFilePath))) {
-                $DirectoryPath = (Get-Item -LiteralPath $FilePath).Directory.FullName;
-                $CurrentStoredFilePath = Join-Path -Path $DirectoryPath -ChildPath $CurrentStoredFilePath;
+                if ([string]::IsNullOrWhiteSpace($BasePath)) {
+                    $BasePath = (Get-Item -LiteralPath $FilePath).Directory.FullName;
+                }
+
+                $CurrentStoredFilePath = Join-Path -Path $BasePath -ChildPath $CurrentStoredFilePath;
             }
 
             $CurrentStoredFilePath = $CurrentStoredFilePath.Replace($WindowsDirSep, $LinuxDirSep).TrimEnd($LinuxDirSep)

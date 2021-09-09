@@ -27,6 +27,7 @@ function Get-IgugaCanonicalPath() {
         $NonExistentPath
     )
 
+    # In order to convert the path to a canonical path with need to be sure that the path is not relative
     if (-not([System.IO.Path]::IsPathRooted($Path))) {
         if ($NonExistentPath.IsPresent) {
             # In this case will not use Resolve-path because it requires that the path exists
@@ -45,8 +46,8 @@ function Get-IgugaCanonicalPath() {
         }
     }
 
-    $WindowsDirSep = "\"
-    $LinuxDirSep = "/"
+    $WindowsDirSep = [System.IO.Path]::DirectorySeparatorChar
+    $LinuxDirSep = [System.IO.Path]::AltDirectorySeparatorChar
 
     if ($NonExistentPath.IsPresent -or $IsLinux) {
         return $Path.Replace($WindowsDirSep, $LinuxDirSep).TrimEnd($LinuxDirSep)
@@ -54,10 +55,23 @@ function Get-IgugaCanonicalPath() {
 
     $IsDirectory = -not(Test-Path -LiteralPath $Path -PathType Leaf)
 
-    $Qualifier = Split-Path -Path $Path -Qualifier
     $AdaptedPath = (Split-Path -Path $Path -NoQualifier).Replace($WindowsDirSep, $LinuxDirSep).Trim($LinuxDirSep)
     $Parts = $AdaptedPath.Split($LinuxDirSep)
-    $CanonicalPath = "$Qualifier$LinuxDirSep"
+    # we should avoid to use (Split-Path -Path $Path -Qualifier) because it does not work with UNC Path
+    $CanonicalPath = (Get-Item -Path $Path).PSDrive.Root
+
+    if ([string]::IsNullOrEmpty($CanonicalPath)) {
+        if ($Parts.Count -ge 2 -and ($Path.StartsWith("\\") -or $Path.StartsWith("//"))) {
+            $CanonicalPath = $LinuxDirSep + $LinuxDirSep + $($Parts[0]) + $LinuxDirSep + $($Parts[1])
+            $Parts = if ($Parts.Count -eq 2) {
+                @()
+            } else {
+                $Parts[2 .. ($Parts.Count - 1)]
+            }
+        } else {
+            throw [IgugaError]::InvalidArgument($Script:LocalizedData.ErrorInvalidArgument, "Path")
+        }
+    }
 
     for ($i = 0; $i -lt $Parts.Count; $i++) {
         if ((($i + 1) -lt $Parts.Count) -or $IsDirectory) {

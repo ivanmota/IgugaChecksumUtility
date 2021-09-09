@@ -13,7 +13,8 @@ Validate checksum file
 ## SYNTAX
 
 ```
-Test-IgugaChecksumFile [-FilePath] <String> [-Algorithm <String>] [-Silent] [<CommonParameters>]
+Test-IgugaChecksumFile [-FilePath] <String> [-BasePath <String>] [-Algorithm <String>] [-Silent]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -39,6 +40,23 @@ Aliases:
 
 Required: True
 Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -BasePath
+Used with Validate mode, sets the base path.
+This parameter is usefull when the paths inside of the checksum file are
+relative and the file being validated is located in a not related path.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

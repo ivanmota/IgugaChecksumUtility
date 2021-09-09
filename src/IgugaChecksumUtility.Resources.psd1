@@ -8,6 +8,7 @@ CompareOpProgressStatus=Running...
 DiscoveringFilesProgressCompleted=Discovering files completed!
 DiscoveringFilesProgressMessage=Discovering files, from '{0}'
 DiscoveringFilesProgressStatus=Running...
+ErrorBasePathNotFound=Cannot find base path '{0}' because it does not exist.
 ErrorInvalidArgument={0} parameter value is not valid
 ErrorLoadingScript=There was an error loading '{0}': {1}
 ErrorPathNotFound=Cannot find path '{0}' because it does not exist.
