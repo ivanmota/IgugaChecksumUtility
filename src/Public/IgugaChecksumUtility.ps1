@@ -312,6 +312,7 @@ function IgugaChecksumUtility {
     } elseif ($Mode -eq "ShowMailerSetting") {
         try {
             $settings = Get-IgugaMailerSetting -SettingsFilePath $SettingsFilePath
+            Write-IgugaColorOutput ""
             Write-IgugaColorOutput "SMTP Server: $($settings.SMTPServer)"
             Write-IgugaColorOutput "Port: $($settings.Port)"
             if ($settings.Credential) {
