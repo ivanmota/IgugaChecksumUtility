@@ -296,7 +296,10 @@ function IgugaChecksumUtility {
             Write-Progress -Activity $Script:LocalizedData.PrintChecksumProgressCompleted -Completed
         }
     } elseif ($Mode -eq "SetMailerSetting") {
-        if ($MailerSetting) {
+        if ($null -eq $MailerSetting) {
+            Write-IgugaColorOutputv "[-] $($Script:LocalizedData.ErrorUtilityParameterRequiredMode -f $Mode, 'MailerSetting')" -ForegroundColor Red
+            return
+        } else {
             try {
                 if ($PSCmdlet.ShouldProcess("MailerSetting", "SetMailerSetting")) {
                     Set-IgugaMailerSetting -Settings $MailerSetting -SettingsFilePath $SettingsFilePath -WhatIf:$WhatIfPreference
@@ -305,9 +308,6 @@ function IgugaChecksumUtility {
             } catch {
                 Write-IgugaColorOutput "[-] $($_.Exception)" -ForegroundColor Red
             }
-        } else {
-            Write-IgugaColorOutputv "[-] $($Script:LocalizedData.ErrorUtilityParameterRequiredMode -f $Mode, 'MailerSetting')" -ForegroundColor Red
-            return
         }
     } elseif ($Mode -eq "ShowMailerSetting") {
         try {

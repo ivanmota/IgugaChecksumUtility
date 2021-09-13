@@ -7,6 +7,10 @@ function Get-IgugaMailerSetting {
         $SettingsFilePath
     )
 
+    if (-not(Test-Path -LiteralPath $SettingsFilePath -PathType Leaf)) {
+        throw [IgugaError]::PathNotFound($Script:LocalizedData.ErrorSettingsFileNotFound, $Path)
+    }
+
     $Settings = [IgugaMailerSetting]::new();
 
     $Username = Get-IgugaSetting -Path $SettingsFilePath -Key "IgugaMailerUsername"
