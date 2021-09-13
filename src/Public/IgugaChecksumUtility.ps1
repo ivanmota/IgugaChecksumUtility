@@ -35,7 +35,7 @@ function IgugaChecksumUtility {
         Sets the file path to export the output. If the output file path is not provided the output will be printed to the console
     .PARAMETER Silent
         Omitte the progress status and the output will not be printed on the console
-    .PARAMETER SendMailNotification
+    .PARAMETER SendEmailNotification
         Used with Validate mode, indicates in which condition a notification email should be sent after the validation process.
         Please note that the email notification only supported Powershell version 7 or higher.
         The allowed values are: None, Always, Success, NotSuccess.
@@ -46,13 +46,13 @@ function IgugaChecksumUtility {
     .PARAMETER MailerSetting
         Used with SetMailerSetting mode, sets the mailer settings
     .PARAMETER From
-        Used with the parameter SendMailNotification, sets the from mail address
+        Used with the parameter SendEmailNotification, sets the from mail address
     .PARAMETER ToList
-        Used with the parameter SendMailNotification, sets the to list mail addresses
+        Used with the parameter SendEmailNotification, sets the to list mail addresses
     .PARAMETER CcList
-        Used with the parameter SendMailNotification, sets the cc list mail addresses
+        Used with the parameter SendEmailNotification, sets the cc list mail addresses
     .PARAMETER BccList
-        Used with the parameter SendMailNotification, sets the bcc list mail addresses
+        Used with the parameter SendEmailNotification, sets the bcc list mail addresses
     .EXAMPLE
         # Checksum a single file, and output to console
         IgugaChecksumUtility -Mode Generate -Path C:\Test\File.docx
@@ -113,7 +113,7 @@ function IgugaChecksumUtility {
 
         [string]
         [ValidateSet("None", "Always", "Success", "NotSuccess")]
-        $SendMailNotification = "None",
+        $SendEmailNotification = "None",
 
         [IgugaMailerSetting]
         $MailerSetting,
@@ -162,24 +162,24 @@ function IgugaChecksumUtility {
         $OutputFilePathDefinedByUser = $false;
     }
 
-    if (-not($SendMailNotification -eq "None")) {
+    if (-not($SendEmailNotification -eq "None")) {
         if ($PSVersionTable.PSVersion.Major -lt 7) {
             Write-IgugaColorOutput "[-] $($Script:LocalizedData.ErrorPSVersionFunctionNotSupported -f 'Send-IgugaMailMessage', '7.0')" -ForegroundColor Red
             return
         }
 
         if (-not(Test-Path -LiteralPath $SettingsFilePath -PathType Leaf)) {
-            Write-IgugaColorOutput -Message "[-] $($Script:LocalizedData.ErrorUtilitySettingsFileDoesNotExists -f 'SendMailNotification', 'SetMailerSetting')" -ForegroundColor Red
+            Write-IgugaColorOutput -Message "[-] $($Script:LocalizedData.ErrorUtilitySettingsFileDoesNotExists -f 'SendEmailNotification', 'SetMailerSetting')" -ForegroundColor Red
             return;
         }
 
-        if (-not($PSBoundParameters.ContainsKey("From"))) {
-            Write-IgugaColorOutput "[-] $($Script:LocalizedData.ErrorUtilityParameterRequired -f 'SendMailNotification', 'From')" -ForegroundColor Red
+        if ($null -eq $From) {
+            Write-IgugaColorOutput "[-] $($Script:LocalizedData.ErrorUtilityParameterRequired -f 'SendEmailNotification', 'From')" -ForegroundColor Red
             return
         }
 
         if ($ToList.Count -eq 0) {
-            Write-IgugaColorOutput "[-] $($Script:LocalizedData.ErrorUtilityParameterRequired -f 'SendMailNotification', 'ToList')" -ForegroundColor Red
+            Write-IgugaColorOutput "[-] $($Script:LocalizedData.ErrorUtilityParameterRequired -f 'SendEmailNotification', 'ToList')" -ForegroundColor Red
             return
         }
 
@@ -323,6 +323,7 @@ function IgugaChecksumUtility {
                 Write-IgugaColorOutput "Password: *************"
             }
             Write-IgugaColorOutput "Encryption: $($settings.Encryption)"
+            Write-IgugaColorOutput "File Path: $($SettingsFilePath)"
             Write-IgugaColorOutput ""
         } catch {
             Write-Error -Message "[-] $($_.Exception)"
@@ -346,13 +347,13 @@ function IgugaChecksumUtility {
 
     Write-IgugaReporSummary -Mode $Mode -OutputFilePath $OutputFilePath -Algorithm $Algorithm -Path $Path -Footer -Verbose:($PSBoundParameters['Verbose'] -eq $true)
 
-    if (-not($SendMailNotification -eq "None")) {
+    if (-not($SendEmailNotification -eq "None")) {
         $SendNotification = $false
-        if (($SendMailNotification -eq "Success") -and ($Script:TotalOfItems -eq $Script:ReportItemsValid)) {
+        if (($SendEmailNotification -eq "Success") -and ($Script:TotalOfItems -eq $Script:ReportItemsValid)) {
             $SendNotification = $true
-        } elseif (($SendMailNotification -eq "NotSuccess") -and ($Script:TotalOfItems -ne $Script:ReportItemsValid)) {
+        } elseif (($SendEmailNotification -eq "NotSuccess") -and ($Script:TotalOfItems -ne $Script:ReportItemsValid)) {
             $SendNotification = $true
-        } elseif ($SendMailNotification -eq "Always") {
+        } elseif ($SendEmailNotification -eq "Always") {
             $SendNotification = $true
         }
 
@@ -367,7 +368,7 @@ function IgugaChecksumUtility {
             $TextBody += " - Failed: $($Script:ReportItemsInvalid)`n"
             $TextBody += " - File not found: $($Script:ReportItemsFileNotFound)`n"
             $TextBody += "`n"
-            $TextBody += "For more information please find attached the completed report.`n"
+            $TextBody += "For more information please find attached the report.`n"
             $TextBody += "`n"
             $TextBody += "---`n"
             $TextBody += "$($MyInvocation.MyCommand.Module.Name)`n"
@@ -384,6 +385,8 @@ function IgugaChecksumUtility {
             }
 
             Send-IgugaMailMessage @Parameters
+            Write-IgugaColorOutput "[+] $($Script:LocalizedData.EmailNotificationSentWithSuccess)"
+            Write-IgugaReportContent -Text $($Script:LocalizedData.SetSettingSuccess -f 'MailerSetting') -ForegroundColor Green -OutputFilePath $OutputFilePath -Silent:$Silent
         }
 
         if (-not($OutputFilePathDefinedByUser) -and (Test-Path -LiteralPath $OutputFilePath -PathType Leaf)) {

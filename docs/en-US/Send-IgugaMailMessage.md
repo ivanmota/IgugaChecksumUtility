@@ -20,13 +20,15 @@ Send-IgugaMailMessage [-MailerSetting] <IgugaMailerSetting> [-From] <IgugaMailAd
 ```
 
 ## DESCRIPTION
-Send an email using the implementing the Microsoft-recommended MailKit library
+Send an email using the implementing the Microsoft-recommended MailKit library.
+This function only have support for Powershell version 7 or higher
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
 # How to send a simple email
+using module IgugaChecksumUtility
 $Credential = [PSCredential]::new("example@gmail.com", (ConvertTo-SecureString -String 'password-example' -AsPlainText -Force))
 $MailerSetting = [IgugaMailerSetting]::new("smtp.gmail.com", 587, $Credential)
 $From = [IgugaMailAddress]::new("My Name", "example@gmail.com")
@@ -37,7 +39,7 @@ Send-IgugaMailMessage -MailerSetting $MailerSetting -From $From -ToList $ToList 
 ## PARAMETERS
 
 ### -MailerSetting
-Sets the SMTP server host name to connect to.
+Sets the SMTP server host name to connect to
 
 ```yaml
 Type: IgugaMailerSetting
@@ -52,7 +54,7 @@ Accept wildcard characters: False
 ```
 
 ### -From
-Sets the addreess in the From header.
+Sets the addreess in the From header
 
 ```yaml
 Type: IgugaMailAddress
@@ -67,7 +69,7 @@ Accept wildcard characters: False
 ```
 
 ### -ToList
-Sets the list of addresses in the To header.
+Sets the list of addresses in the To header
 
 ```yaml
 Type: IgugaMailAddress[]
@@ -82,7 +84,7 @@ Accept wildcard characters: False
 ```
 
 ### -CcList
-Sets the list of addresses in the Cc header.
+Sets the list of addresses in the Cc header
 
 ```yaml
 Type: IgugaMailAddress[]
@@ -97,7 +99,7 @@ Accept wildcard characters: False
 ```
 
 ### -BccList
-Sets the list of addresses in the Bcc header.
+Sets the list of addresses in the Bcc header
 
 ```yaml
 Type: IgugaMailAddress[]
@@ -112,7 +114,7 @@ Accept wildcard characters: False
 ```
 
 ### -Subject
-Sets the subject of the message.
+Sets the subject of the message
 
 ```yaml
 Type: String
@@ -127,7 +129,7 @@ Accept wildcard characters: False
 ```
 
 ### -TextBody
-Sets the text body if it exists; otherwise, $null.
+Sets the text body if it exists
 
 ```yaml
 Type: String
@@ -142,7 +144,7 @@ Accept wildcard characters: False
 ```
 
 ### -HTMLBody
-Sets the html body if it exists; otherwise, null.
+Sets the html body if it exists
 
 ```yaml
 Type: String

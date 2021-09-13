@@ -8,6 +8,8 @@
 
 [Test-IgugaChecksumFile](https://github.com/ivanmota/IgugaChecksumUtility/blob/master/docs/en-US/Test-IgugaChecksumFile.md) - Validate a checksum file
 
+[Send-IgugaMailMessage](https://github.com/ivanmota/IgugaChecksumUtility/blob/master/docs/en-US/Send-IgugaMailMessage.md) - Send an email using MailKit
+
 [IgugaChecksumUtility](https://github.com/ivanmota/IgugaChecksumUtility/blob/master/docs/en-US/IgugaChecksumUtility.md) - Generates and validate checksums for files or directories
 
 

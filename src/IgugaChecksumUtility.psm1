@@ -8,6 +8,7 @@ $Script:LocalizedData = DATA {
     DiscoveringFilesProgressCompleted=Discovering files completed!
     DiscoveringFilesProgressMessage=Discovering files, from '{0}'
     DiscoveringFilesProgressStatus=Running...
+    EmailNotificationSentWithSuccess=Email notification sent successfully
     ErrorInvalidArgument='{0}' parameter value is not valid
     ErrorInvalidSetting='{0}' setting value is not valid
     ErrorLoadingScript=There was an error loading '{0}': {1}

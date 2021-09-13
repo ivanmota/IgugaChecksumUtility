@@ -3,27 +3,28 @@ function Send-IgugaMailMessage {
     .SYNOPSIS
         Send an email using MailKit
     .DESCRIPTION
-        Send an email using the implementing the Microsoft-recommended MailKit library
+        Send an email using the implementing the Microsoft-recommended MailKit library. This function only have support for Powershell version 7 or higher
     .PARAMETER MailerSetting
-        Sets the SMTP server host name to connect to.
+        Sets the SMTP server host name to connect to
     .PARAMETER From
-        Sets the addreess in the From header.
+        Sets the addreess in the From header
     .PARAMETER ToList
-        Sets the list of addresses in the To header.
+        Sets the list of addresses in the To header
     .PARAMETER CcList
-        Sets the list of addresses in the Cc header.
+        Sets the list of addresses in the Cc header
     .PARAMETER BccList
-        Sets the list of addresses in the Bcc header.
+        Sets the list of addresses in the Bcc header
     .PARAMETER Subject
-        Sets the subject of the message.
+        Sets the subject of the message
     .PARAMETER TextBody
-        Sets the text body if it exists; otherwise, $null.
+        Sets the text body if it exists
     .PARAMETER HTMLBody
-        Sets the html body if it exists; otherwise, null.
+        Sets the html body if it exists
     .PARAMETER AttachmentList
         Sets the attachements file path list
     .EXAMPLE
         # How to send a simple email
+        using module IgugaChecksumUtility
         $Credential = [PSCredential]::new("example@gmail.com", (ConvertTo-SecureString -String 'password-example' -AsPlainText -Force))
         $MailerSetting = [IgugaMailerSetting]::new("smtp.gmail.com", 587, $Credential)
         $From = [IgugaMailAddress]::new("My Name", "example@gmail.com")

@@ -13,9 +13,11 @@ Generates and validate checksums for files or directories
 ## SYNTAX
 
 ```
-IgugaChecksumUtility [-Mode] <String> [-Path] <String> [-BasePath <String>] [-Algorithm <String>]
+IgugaChecksumUtility [-Mode] <String> [-Path <String>] [-BasePath <String>] [-Algorithm <String>]
  [-Hash <String>] [-Filter <String>] [-Exclude <String[]>] [-Depth <Int32>] [-OutFile] [-OutFilePath <String>]
- [-UseAbsolutePath] [-OutputFilePath <String>] [-Silent] [<CommonParameters>]
+ [-UseAbsolutePath] [-OutputFilePath <String>] [-Silent] [-SendEmailNotification <String>]
+ [-MailerSetting <IgugaMailerSetting>] [-From <IgugaMailAddress>] [-ToList <IgugaMailAddress[]>]
+ [-CcList <IgugaMailAddress[]>] [-BccList <IgugaMailAddress[]>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -50,7 +52,8 @@ IgugaChecksumUtility -Mode Compare -Path C:\Test\File.docx -Algorithm SHA1 -Hash
 ## PARAMETERS
 
 ### -Mode
-Sets the operation mode
+Sets the operation mode.
+The allowed modes are: Generate, Validate, Compare, SetMailerSetting, RemoveMailerSetting, ShowMailerSetting
 
 ```yaml
 Type: String
@@ -72,8 +75,8 @@ Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
-Position: 2
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -194,7 +197,7 @@ Accept wildcard characters: False
 
 ### -OutFilePath
 Used with Generate mode, sets the path of the generated checksum file.
-If this parameter is not provided the default name will be "{Algorithm}SUMS.txt" and will be stored on the Path directory
+If this parameter is not provided the default name will be "{Algorithm}SUMS.txt" and will be stored on the Path root directory
 
 ```yaml
 Type: String
@@ -250,6 +253,133 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SendEmailNotification
+Used with Validate mode, indicates in which condition a notification email should be sent after the validation process.
+Please note that the email notification only supported Powershell version 7 or higher.
+The allowed values are: None, Always, Success, NotSuccess.
+'None' means no notification mail will be sent.
+'Always' means a notification will be sent after each validation process.
+'Success' means a notification mail will be sent only if all file validation passed.
+'NotSuccess' means a notification mail will be sent if at least one file validation failed or not found.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MailerSetting
+Used with SetMailerSetting mode, sets the mailer settings
+
+```yaml
+Type: IgugaMailerSetting
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -From
+Used with the parameter SendEmailNotification, sets the from mail address
+
+```yaml
+Type: IgugaMailAddress
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ToList
+Used with the parameter SendEmailNotification, sets the to list mail addresses
+
+```yaml
+Type: IgugaMailAddress[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -CcList
+Used with the parameter SendEmailNotification, sets the cc list mail addresses
+
+```yaml
+Type: IgugaMailAddress[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -BccList
+Used with the parameter SendEmailNotification, sets the bcc list mail addresses
+
+```yaml
+Type: IgugaMailAddress[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WhatIf
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

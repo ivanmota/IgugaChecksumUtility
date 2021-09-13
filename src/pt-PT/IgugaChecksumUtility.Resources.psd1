@@ -5,6 +5,7 @@ ConvertFrom-StringData @'
 CompareOpProgressCompleted=A comparação hash do ficheiro foi concluída!
 CompareOpProgressMessage=A comparar o hash do ficheiro, origem: {0}
 CompareOpProgressStatus=Em execução...
+EmailNotificationSentWithSuccess=Notificação de email enviada com sucesso
 ErrorBasePathNotFound=Não foi possível encontrar o caminho base '{0}' porque o mesmo não existe.
 ErrorInvalidArgument=O valor do parametro '{0}' não é válido
 ErrorInvalidSetting=O valor da opção '{0}' não é válido
