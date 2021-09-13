@@ -8,12 +8,18 @@ $Script:LocalizedData = DATA {
     DiscoveringFilesProgressCompleted=Discovering files completed!
     DiscoveringFilesProgressMessage=Discovering files, from '{0}'
     DiscoveringFilesProgressStatus=Running...
-    ErrorInvalidArgument={0} parameter value is not valid
+    ErrorInvalidArgument='{0}' parameter value is not valid
+    ErrorInvalidSetting='{0}' setting value is not valid
     ErrorLoadingScript=There was an error loading '{0}': {1}
-    ErrorPathNotFound=Cannot find path '{0}' because it does not exist.
-    ErrorUtilityParameterRequired=To use {0} mode, the {1} parameter must be set correctly
-    ErrorUtilityPathNotFound={0} mode was selected, but path '{1}' does not exists!
-    ErrorUtilityPathNotValidFile={0} mode was selected, but path '{1}' is not a valid file!
+    ErrorPathNotFound=Cannot find path '{0}' because it does not exist
+    ErrorPSVersionFunctionNotSupported=The function '{0}' is not supported by your Powershell version. This operation require at least Powershell version '{1}'
+    ErrorSettingsFileNotFound=The settings file '{0}' has not been created yet
+    ErrorUtilityParameterRequired=To use '{0}', the '{1}' parameter must be set correctly
+    ErrorUtilityParameterRequiredMode=To use '{0}' mode, the '{1}' parameter must be set correctly
+    ErrorUtilityPathNotFound='{0}' mode was selected, but path '{1}' does not exists!
+    ErrorUtilityPathNotValidFile='{0}' mode was selected, but path '{1}' is not a valid file!
+    ErrorUtilitySettingsFileDoesNotExists=To use '{0}', the settings file needs to be created first. To create the settings file please use the mode '{1}'
+    ErrorUtilitySettingsFileDoesNotExistsMode='{0}' mode was selected, but the settings file has not been created yet. To create the settings file please use the mode '{1}'
     ErrorUtilityValidateFileNotFound=File does not exist at this path: {0}
     GenerateOpCounterProgressStatus=File {0} of {1}
     GenerateOpProgressCompleted=Generate operation completed!
@@ -23,6 +29,8 @@ $Script:LocalizedData = DATA {
     PrintChecksumProgressCompleted=Printing the checksums completed!
     PrintChecksumProgressMessage=Printing the checksums
     PrintChecksumProgressStatus=Running...
+    RemoveSettingSuccess=[ Removed ] The parameter '{0}' was removed successfully
+    SetSettingSuccess=[ Set ] The parameter '{0}' had set successfully
     ValidateOpProgressCompleted=Validate operation completed!
     ValidateOpProgressMessage=Validating checksum file, source: '{0}'
     ValidateOpProgressStatus=Running {0}
@@ -38,7 +46,7 @@ Import-LocalizedData -BindingVariable "Script:LocalizedData" -FileName IgugaChec
 
 # -------------------------- Load Script Files ----------------------------
 #
-$Classes  = @( Get-ChildItem -Path "$PSScriptRoot\Classes\*.ps1" -ErrorAction SilentlyContinue )
+$Classes = @( Get-ChildItem -Path "$PSScriptRoot\Classes\*.ps1" -ErrorAction SilentlyContinue )
 $Public  = @( Get-ChildItem -Path "$PSScriptRoot\Public\*.ps1" -ErrorAction SilentlyContinue )
 $Private = @( Get-ChildItem -Path "$PSScriptRoot\Private\*.ps1" -ErrorAction SilentlyContinue )
 

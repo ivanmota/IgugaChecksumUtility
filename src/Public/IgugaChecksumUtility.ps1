@@ -5,7 +5,8 @@ function IgugaChecksumUtility {
     .DESCRIPTION
         Generates and validate checksum file hashes for a variety of algorithms
     .PARAMETER Mode
-        Sets the operation mode
+        Sets the operation mode.
+        The allowed modes are: Generate, Validate, Compare, SetMailerSetting, RemoveMailerSetting, ShowMailerSetting
     .PARAMETER Path
         Sets the path to a given file or directory
     .PARAMETER BasePath
@@ -27,13 +28,31 @@ function IgugaChecksumUtility {
         Used with Generate mode, sets whether it will generate a checksum file or not
     .PARAMETER OutFilePath
         Used with Generate mode, sets the path of the generated checksum file.
-        If this parameter is not provided the default name will be "{Algorithm}SUMS.txt" and will be stored on the Path directory
+        If this parameter is not provided the default name will be "{Algorithm}SUMS.txt" and will be stored on the Path root directory
     .PARAMETER UseAbsolutePath
         Used with Generate mode, sets whether the checksum file path should be absolute or not
     .PARAMETER OutputFilePath
         Sets the file path to export the output. If the output file path is not provided the output will be printed to the console
     .PARAMETER Silent
         Omitte the progress status and the output will not be printed on the console
+    .PARAMETER SendMailNotification
+        Used with Validate mode, indicates in which condition a notification email should be sent after the validation process.
+        Please note that the email notification only supported for Powershell version 7 or higher.
+        The allowed values are: None, Always, Success, NotSuccess.
+        'None' means no notification mail will be sent.
+        'Always' means a notification will be sent after each validation process.
+        'Success' means a notification mail will be sent only if all file validation passed.
+        'NotSuccess' means a notification mail will be sent if at least one file validation failed or not found.
+    .PARAMETER MailerSetting
+        Used with SetMailerSetting mode, sets the mailer settings
+    .PARAMETER From
+        Used with the parameter SendMailNotification, sets the from mail address
+    .PARAMETER ToList
+        Used with the parameter SendMailNotification, sets the to list mail addresses
+    .PARAMETER CcList
+        Used with the parameter SendMailNotification, sets the cc list mail addresses
+    .PARAMETER BccList
+        Used with the parameter SendMailNotification, sets the bcc list mail addresses
     .EXAMPLE
         # Checksum a single file, and output to console
         IgugaChecksumUtility -Mode Generate -Path C:\Test\File.docx
@@ -47,16 +66,13 @@ function IgugaChecksumUtility {
         # Perform a compare operation on a file with a known hash
         IgugaChecksumUtility -Mode Compare -Path C:\Test\File.docx -Algorithm SHA1 -Hash ED1B042C1B986743C1E34EBB1FAF758549346B24
     #>
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
     Param(
-        [Parameter(Position = 0, Mandatory = $true, HelpMessage = "The the operation mode. The allowed modes are: Generate, Validate and Compare")]
-        [ValidateSet("Generate", "Validate", "Compare")]
+        [Parameter(Position = 0, Mandatory = $true, HelpMessage = "The the operation mode. The allowed modes are: Generate, Validate, Compare, SetMailerSetting, RemoveMailerSetting and ShowMailerSetting")]
+        [ValidateSet("Generate", "Validate", "Compare", "SetMailerSetting", "RemoveMailerSetting", "ShowMailerSetting")]
         [string]
         $Mode,
 
-        [Parameter(Position = 1,
-        Mandatory = $true,
-        HelpMessage = "The path to a given file or directory")]
         [string]
         $Path,
 
@@ -93,7 +109,26 @@ function IgugaChecksumUtility {
         $OutputFilePath,
 
         [Switch]
-        $Silent
+        $Silent,
+
+        [string]
+        [ValidateSet("None", "Always", "Success", "NotSuccess")]
+        $SendMailNotification = "None",
+
+        [IgugaMailerSetting]
+        $MailerSetting,
+
+        [IgugaMailAddress]
+        $From,
+
+        [IgugaMailAddress[]]
+        $ToList,
+
+        [IgugaMailAddress[]]
+        $CcList,
+
+        [IgugaMailAddress[]]
+        $BccList
     )
 
     $Script:TotalOfItems = 0
@@ -102,9 +137,55 @@ function IgugaChecksumUtility {
     $Script:ReportItemsInvalid = 0
     $Script:ReportItemsFileNotFound = 0
 
-    if (-not(Test-Path -LiteralPath $Path -PathType Any)) {
-        Write-IgugaColorOutput "[-] $($Script:LocalizedData.ErrorUtilityPathNotFound -f $Mode, $Path)" -ForegroundColor Red
-        return;
+    $SettingsFilePath = [Environment]::GetFolderPath([System.Environment+SpecialFolder]::ApplicationData)
+    $SettingsFilePath = Join-Path -Path $SettingsFilePath -ChildPath $MyInvocation.MyCommand.Module.Name
+    if (-not(Test-Path -LiteralPath $SettingsFilePath -PathType Container)) {
+        New-Item -Path $SettingsFilePath -ItemType Directory
+    }
+    $SettingsFilePath = Join-Path -Path $SettingsFilePath -ChildPath "Settings.clixml"
+
+    if ($Mode -notin @("SetMailerSetting", "RemoveMailerSetting", "ShowMailerSetting")) {
+
+        if ([string]::IsNullOrWhiteSpace($Path)) {
+            Write-IgugaColorOutput "[-] $($Script:LocalizedData.ErrorUtilityParameterRequiredMode -f $Mode, 'Path')" -ForegroundColor Red
+            return;
+        }
+
+        if (-not(Test-Path -LiteralPath $Path -PathType Any)) {
+            Write-IgugaColorOutput "[-] $($Script:LocalizedData.ErrorUtilityPathNotFound -f $Mode, $Path)" -ForegroundColor Red
+            return;
+        }
+    }
+
+    $OutputFilePathDefinedByUser = $true;
+    if ([string]::IsNullOrWhiteSpace($OutFilePath)) {
+        $OutputFilePathDefinedByUser = $false;
+    }
+
+    if (-not($SendMailNotification -eq "None")) {
+        if ($PSVersionTable.PSVersion.Major -lt 7) {
+            Write-IgugaColorOutput "[-] $($Script:LocalizedData.ErrorPSVersionFunctionNotSupported -f 'Send-IgugaMailMessage', '7.0')" -ForegroundColor Red
+            return
+        }
+
+        if (-not(Test-Path -LiteralPath $SettingsFilePath -PathType Leaf)) {
+            Write-IgugaColorOutput -Message "[-] $($Script:LocalizedData.ErrorUtilitySettingsFileDoesNotExists -f 'SendMailNotification', 'SetMailerSetting')" -ForegroundColor Red
+            return;
+        }
+
+        if (-not($PSBoundParameters.ContainsKey("From"))) {
+            Write-IgugaColorOutput "[-] $($Script:LocalizedData.ErrorUtilityParameterRequired -f 'SendMailNotification', 'From')" -ForegroundColor Red
+            return
+        }
+
+        if ($ToList.Count -eq 0) {
+            Write-IgugaColorOutput "[-] $($Script:LocalizedData.ErrorUtilityParameterRequired -f 'SendMailNotification', 'ToList')" -ForegroundColor Red
+            return
+        }
+
+        if (-not($OutputFilePathDefinedByUser)) {
+            $OutputFilePath = Join-Path -Path $([System.IO.Path]::GetTempPath()) -ChildPath "IgugaChecksumReport.$(Get-Random).txt"
+        }
     }
 
     Write-IgugaReporSummary -Mode $Mode -OutputFilePath $OutputFilePath -Algorithm $Algorithm -Path $Path -Verbose:($PSBoundParameters['Verbose'] -eq $true)
@@ -134,6 +215,7 @@ function IgugaChecksumUtility {
             }
         } catch {
             Write-Error -Message "[-] $($_.Exception)"
+            return
         }
     } elseif ($Mode -eq "Compare") {
         try {
@@ -159,6 +241,7 @@ function IgugaChecksumUtility {
             } else {
                 Write-Error -Message "[-] $($_.Exception)"
             }
+            return
         }
     } elseif ($Mode -eq "Generate") {
         $Parameters = @{
@@ -216,9 +299,97 @@ function IgugaChecksumUtility {
         {
             Write-Progress -Activity $Script:LocalizedData.PrintChecksumProgressCompleted -Completed
         }
+    } elseif ($Mode -eq "SetMailerSetting") {
+        if ($MailerSetting) {
+            try {
+                if ($PSCmdlet.ShouldProcess("MailerSetting", "SetMailerSetting")) {
+                    Set-IgugaMailerSetting -Settings $MailerSetting -SettingsFilePath $SettingsFilePath -WhatIf:$WhatIfPreference
+                    Write-IgugaReportContent -Text $($Script:LocalizedData.SetSettingSuccess -f 'MailerSetting') -ForegroundColor Green -OutputFilePath $OutputFilePath -Silent:$Silent
+                }
+            } catch {
+                Write-Error -Message "[-] $($_.Exception)"
+            }
+        } else {
+            Write-Error "[-] $($Script:LocalizedData.ErrorUtilityParameterRequiredMode -f $Mode, 'MailerSetting')"
+            return
+        }
+    } elseif ($Mode -eq "ShowMailerSetting") {
+        try {
+            $settings = Get-IgugaMailerSetting -SettingsFilePath $SettingsFilePath
+            Write-IgugaColorOutput "SMTP Server: $($settings.SMTPServer)"
+            Write-IgugaColorOutput "Port: $($settings.Port)"
+            if ($settings.Credential) {
+                Write-IgugaColorOutput "Username: $($settings.Credential.Username)"
+                Write-IgugaColorOutput "Password: *************"
+            }
+            Write-IgugaColorOutput "Encryption: $($settings.Encryption)"
+            Write-IgugaColorOutput ""
+        } catch {
+            Write-Error -Message "[-] $($_.Exception)"
+        }
+    } elseif ($Mode -eq "RemoveMailerSetting") {
+        try {
+            if ($PSCmdlet.ShouldProcess("MailerSetting", "RemoveMailerSetting")) {
+                Remove-IgugaMailerSetting -SettingsFilePath $SettingsFilePath -WhatIf:$WhatIfPreference
+                Write-IgugaReportContent -Text $($Script:LocalizedData.RemoveSettingSuccess -f 'MailerSetting') -ForegroundColor Green -OutputFilePath $OutputFilePath -Silent:$Silent
+            }
+        } catch {
+            if ($_.FullyQualifiedErrorId -eq 'PathNotFound') {
+                Write-Error -Message "[-] $($Script:LocalizedData.ErrorUtilitySettingsFileDoesNotExistsMode -f $Mode, 'SetMailerSetting')"
+                return
+            } else {
+                Write-Error -Message "[-] $($_.Exception)"
+                return
+            }
+        }
     }
 
     Write-IgugaReporSummary -Mode $Mode -OutputFilePath $OutputFilePath -Algorithm $Algorithm -Path $Path -Footer -Verbose:($PSBoundParameters['Verbose'] -eq $true)
+
+    if (-not($SendMailNotification -eq "None")) {
+        $SendNotification = $false
+        if (($SendMailNotification -eq "Success") -and ($Script:TotalOfItems -eq $Script:ReportItemsValid)) {
+            $SendNotification = $true
+        } elseif (($SendMailNotification -eq "NotSuccess") -and ($Script:TotalOfItems -ne $Script:ReportItemsValid)) {
+            $SendNotification = $true
+        } elseif ($SendMailNotification -eq "Always") {
+            $SendNotification = $true
+        }
+
+        if (($Mode -eq 'Validate') -and $SendNotification) {
+            $MailerSetting = Get-IgugaMailerSetting -SettingsFilePath $SettingsFilePath
+
+            $TextBody = "Hi there,`n"
+            $TextBody += "`n"
+            $TextBody += "Please find below the validation results:`n"
+            $TextBody += " - Total of Items: $($Script:TotalOfItems)`n"
+            $TextBody += " - Passed: $($Script:ReportItemsValid)`n"
+            $TextBody += " - Failed: $($Script:ReportItemsInvalid)`n"
+            $TextBody += " - File not found: $($Script:ReportItemsFileNotFound)`n"
+            $TextBody += "`n"
+            $TextBody += "For more information please find attached the completed report.`n"
+            $TextBody += "`n"
+            $TextBody += "---`n"
+            $TextBody += "$($MyInvocation.MyCommand.Module.Name)`n"
+
+            $Parameters = @{
+                MailerSetting = $MailerSetting
+                From = $From
+                ToList = $ToList
+                CcList = $CcList
+                BccList = $BccList
+                Subject = "$($MyInvocation.MyCommand.Module.Name) - Validation Results"
+                TextBody = $TextBody
+                AttachmentList = @($OutputFilePath)
+            }
+
+            Send-IgugaMailMessage @Parameters
+        }
+
+        if (-not($OutputFilePathDefinedByUser) -and (Test-Path -LiteralPath $OutputFilePath -PathType Leaf)) {
+            Remove-Item $OutputFilePath
+        }
+    }
 
     if (-not($Silent.IsPresent)) {
         Write-IgugaColorOutput "[+] $($Script:LocalizedData.OpCompleted)"

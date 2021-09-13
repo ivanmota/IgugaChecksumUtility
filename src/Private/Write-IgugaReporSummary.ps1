@@ -2,7 +2,7 @@ function Write-IgugaReporSummary() {
     param(
         # Mode - sets the operation mode.
         [Parameter(Position = 0, Mandatory = $true)]
-        [ValidateSet("Generate", "Validate", "Compare")]
+        [ValidateSet("Generate", "Validate", "Compare", "SetMailerSetting", "RemoveMailerSetting", "ShowMailerSetting")]
         [string]
         $Mode,
 
@@ -30,7 +30,11 @@ function Write-IgugaReporSummary() {
     $OutputFileExists = $false;
     if (-not([string]::IsNullOrWhiteSpace($OutputFilePath))) {
         $OutputFileExists = Test-Path -LiteralPath $OutputFilePath -PathType Leaf;
-        $OutputFilePath = Get-IgugaCanonicalPath -Path $OutputFilePath -NonExistentPath:$(-not($OutputFileExists));
+        $OutputFilePath = if ($OutputFileExists) {
+            Get-IgugaCanonicalPath -Path $OutputFilePath
+        } else {
+            Get-IgugaCanonicalPath -Path $OutputFilePath -NonExistentPath;
+        }
         $HasOutput = $true;
     }
 
@@ -38,12 +42,18 @@ function Write-IgugaReporSummary() {
         $FooterNotes = @(
             "",
             "Ended at: $((Get-Date).ToString("yyyy-MM-dd HH:mm:ss"))",
-            "Operation Mode: $Mode",
-            "File Path: $Path",
-            "Checksum Algorithm: $Algorithm"
+            "Operation Mode: $Mode"
         );
 
-        if ($Mode -eq "Generate") {
+        if ($Mode -eq "Compare") {
+            $FooterNotes = @(
+                "",
+                "Ended at: $((Get-Date).ToString("yyyy-MM-dd HH:mm:ss"))",
+                "Operation Mode: $Mode",
+                "File Path: $Path",
+                "Checksum Algorithm: $Algorithm"
+            );
+        } elseif ($Mode -eq "Generate") {
             $FooterNotes = @(
                 ""
                 "Ended at: $((Get-Date).ToString("yyyy-MM-dd HH:mm:ss"))",

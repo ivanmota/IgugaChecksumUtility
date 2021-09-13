@@ -12,7 +12,7 @@
 RootModule = 'IgugaChecksumUtility.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.0.6'
+ModuleVersion = '1.0.7'
 
 # Supported PSEditions
 CompatiblePSEditions = @('PSEdition_Desktop', 'PSEdition_Core', 'Windows', 'Linux', 'MacOS')
@@ -54,12 +54,17 @@ PowerShellVersion = '5.1'
 # RequiredModules = @()
 
 # Assemblies that must be loaded prior to importing this module
-# RequiredAssemblies = @()
+RequiredAssemblies = @(
+    'Libraries/MailKit.dll',
+    'Libraries/MimeKit.dll'
+)
 
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
 ScriptsToProcess = @(
     'Classes\IgugaError.ps1',
-    'Classes\IgugaChecksum.ps1'
+    'Classes\IgugaMailAddress.ps1',
+    'Classes\IgugaValidateResult.ps1',
+    'Classes\IgugaMailerSetting.ps1',
     'Classes\IgugaValidateResult.ps1'
 )
 
@@ -77,6 +82,7 @@ FunctionsToExport =  @(
     'Compare-IgugaFileHash',
     'Get-IgugaChecksum',
     'Get-IgugaPathChecksum',
+    'Send-IgugaMailMessage',
     'Test-IgugaChecksumFile',
     'IgugaChecksumUtility'
 )
@@ -117,7 +123,7 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-        ReleaseNotes = 'Fix some bugs and add support to the BasePath parameter on Validate mode'
+        ReleaseNotes = 'Add support to send email on validation mode. Only available for PS 7'
 
     } # End of PSData hashtable
 

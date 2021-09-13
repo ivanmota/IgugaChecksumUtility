@@ -37,8 +37,16 @@ Describe "Manifest" {
 		$Script:Manifest.LicenseUri | Should -Not -BeNullOrEmpty
 	}
 
-	It "Should contains Copyright" {
+    It "Should contains Copyright" {
 		$Script:Manifest.CopyRight | Should -Not -BeNullOrEmpty
+	}
+
+	It "Should contains PowerShellVersion" {
+		$Script:Manifest.PowerShellVersion | Should -Not -BeNullOrEmpty
+	}
+
+    It "Should contains CompatiblePSEditions" {
+		$Script:Manifest.CompatiblePSEditions | Should -Not -BeNullOrEmpty
 	}
 
     It "Should contains a Project Link" {

@@ -75,9 +75,9 @@ function Get-IgugaCanonicalPath() {
 
     for ($i = 0; $i -lt $Parts.Count; $i++) {
         if ((($i + 1) -lt $Parts.Count) -or $IsDirectory) {
-            $CanonicalPath = (Get-ChildItem -LiteralPath $CanonicalPath -Directory | Where-Object Name -eq $Parts[$i]).FullName
+            $CanonicalPath = (Get-ChildItem -LiteralPath $CanonicalPath -Directory -Force | Where-Object Name -eq $Parts[$i]).FullName
         } else {
-            $CanonicalPath = (Get-ChildItem -LiteralPath $CanonicalPath -File | Where-Object Name -eq $Parts[$i]).FullName
+            $CanonicalPath = (Get-ChildItem -LiteralPath $CanonicalPath -File -Force | Where-Object Name -eq $Parts[$i]).FullName
         }
     }
 
