@@ -326,7 +326,13 @@ function IgugaChecksumUtility {
             Write-IgugaColorOutput "File Path: $($SettingsFilePath)"
             Write-IgugaColorOutput ""
         } catch {
-            Write-Error -Message "[-] $($_.Exception)"
+            if ($_.FullyQualifiedErrorId -eq 'PathNotFound') {
+                Write-Error -Message "[-] $($Script:LocalizedData.ErrorUtilitySettingsFileDoesNotExistsMode -f $Mode, 'SetMailerSetting')"
+                return
+            } else {
+                Write-Error -Message "[-] $($_.Exception)"
+                return
+            }
         }
     } elseif ($Mode -eq "RemoveMailerSetting") {
         try {
