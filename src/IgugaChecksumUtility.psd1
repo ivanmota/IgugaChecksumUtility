@@ -61,9 +61,9 @@ RequiredAssemblies = @(
 
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
 ScriptsToProcess = @(
+    'Classes\IgugaChecksum.ps1',
     'Classes\IgugaError.ps1',
     'Classes\IgugaMailAddress.ps1',
-    'Classes\IgugaValidateResult.ps1',
     'Classes\IgugaMailerSetting.ps1',
     'Classes\IgugaValidateResult.ps1'
 )

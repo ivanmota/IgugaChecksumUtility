@@ -72,4 +72,13 @@ Describe "Manifest" {
 			$ExFunctions -contains $FunctionName | Should -Be $true -Because "function named '$FunctionName' is missing"
 		}
 	}
+
+    It 'exports all public classes' {
+        $ClassesFiles = Get-ChildItem "$ModuleSrcPath\Classes" -Filter *.ps1 | Select-Object -ExpandProperty BaseName
+        $ScriptsToProcess = $Script:Manifest.Scripts | ForEach-Object { (Get-Item $_).BaseName }
+		foreach ($ClassName in $ClassesFiles)
+		{
+            $ScriptsToProcess -contains $ClassName | Should -Be $true -Because "class named '$ClassName' is missing"
+		}
+	}
 }

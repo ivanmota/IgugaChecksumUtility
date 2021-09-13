@@ -37,7 +37,7 @@ function IgugaChecksumUtility {
         Omitte the progress status and the output will not be printed on the console
     .PARAMETER SendMailNotification
         Used with Validate mode, indicates in which condition a notification email should be sent after the validation process.
-        Please note that the email notification only supported for Powershell version 7 or higher.
+        Please note that the email notification only supported Powershell version 7 or higher.
         The allowed values are: None, Always, Success, NotSuccess.
         'None' means no notification mail will be sent.
         'Always' means a notification will be sent after each validation process.
