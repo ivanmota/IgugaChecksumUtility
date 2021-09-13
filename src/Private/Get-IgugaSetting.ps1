@@ -28,7 +28,5 @@ function Get-IgugaSetting {
                 }
             }
         }
-    } else {
-        throw [IgugaError]::PathNotFound($Script:LocalizedData.ErrorSettingsFileNotFound, $Path)
     }
 }

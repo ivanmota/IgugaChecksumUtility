@@ -138,11 +138,7 @@ function IgugaChecksumUtility {
     $Script:ReportItemsFileNotFound = 0
 
     $SettingsFilePath = [Environment]::GetFolderPath([System.Environment+SpecialFolder]::ApplicationData)
-    $SettingsFilePath = Join-Path -Path $SettingsFilePath -ChildPath $MyInvocation.MyCommand.Module.Name
-    if (-not(Test-Path -LiteralPath $SettingsFilePath -PathType Container)) {
-        New-Item -Path $SettingsFilePath -ItemType Directory
-    }
-    $SettingsFilePath = Join-Path -Path $SettingsFilePath -ChildPath "Settings.clixml"
+    $SettingsFilePath = Join-Path -Path $SettingsFilePath -ChildPath "$($MyInvocation.MyCommand.Module.Name)\Settings.clixml"
 
     if ($Mode -notin @("SetMailerSetting", "RemoveMailerSetting", "ShowMailerSetting")) {
 
@@ -214,7 +210,7 @@ function IgugaChecksumUtility {
                 }
             }
         } catch {
-            Write-Error -Message "[-] $($_.Exception)"
+            Write-IgugaColorOutput "[-] $($_.Exception)" -ForegroundColor Red
             return
         }
     } elseif ($Mode -eq "Compare") {
@@ -235,11 +231,11 @@ function IgugaChecksumUtility {
             }
         } catch {
             if ($_.CategoryInfo -eq [ErrorCategory]::ObjectNotFound) {
-                Write-Error -Message "[-] $($Script:LocalizedData.ErrorUtilityPathNotValidFile -f $Mode, $Path)" -Category ObjectNotFound
+                Write-IgugaColorOutput "[-] $($Script:LocalizedData.ErrorUtilityPathNotValidFile -f $Mode, $Path)" -ForegroundColor Red
             } elseif ($_.CategoryInfo -eq [ErrorCategory]::InvalidArgument) {
-                Write-Error -Message "[-] $($Script:LocalizedData.ErrorUtilityPathNotValidFile -f $Mode, 'Hash')" -Category InvalidArgument
+                Write-IgugaColorOutput "[-] $($Script:LocalizedData.ErrorUtilityPathNotValidFile -f $Mode, 'Hash')" -ForegroundColor Red
             } else {
-                Write-Error -Message "[-] $($_.Exception)"
+                Write-IgugaColorOutput "[-] $($_.Exception)" -ForegroundColor Red
             }
             return
         }
@@ -307,10 +303,10 @@ function IgugaChecksumUtility {
                     Write-IgugaReportContent -Text $($Script:LocalizedData.SetSettingSuccess -f 'MailerSetting') -ForegroundColor Green -OutputFilePath $OutputFilePath -Silent:$Silent
                 }
             } catch {
-                Write-Error -Message "[-] $($_.Exception)"
+                Write-IgugaColorOutput "[-] $($_.Exception)" -ForegroundColor Red
             }
         } else {
-            Write-Error "[-] $($Script:LocalizedData.ErrorUtilityParameterRequiredMode -f $Mode, 'MailerSetting')"
+            Write-IgugaColorOutputv "[-] $($Script:LocalizedData.ErrorUtilityParameterRequiredMode -f $Mode, 'MailerSetting')" -ForegroundColor Red
             return
         }
     } elseif ($Mode -eq "ShowMailerSetting") {
@@ -327,10 +323,10 @@ function IgugaChecksumUtility {
             Write-IgugaColorOutput ""
         } catch {
             if ($_.FullyQualifiedErrorId -eq 'PathNotFound') {
-                Write-Error -Message "[-] $($Script:LocalizedData.ErrorUtilitySettingsFileDoesNotExistsMode -f $Mode, 'SetMailerSetting')"
+                Write-IgugaColorOutput "[-] $($Script:LocalizedData.ErrorUtilitySettingsFileDoesNotExistsMode -f $Mode, 'SetMailerSetting')" -ForegroundColor Red
                 return
             } else {
-                Write-Error -Message "[-] $($_.Exception)"
+                Write-IgugaColorOutput "[-] $($_.Exception)" -ForegroundColor Red
                 return
             }
         }
@@ -342,10 +338,10 @@ function IgugaChecksumUtility {
             }
         } catch {
             if ($_.FullyQualifiedErrorId -eq 'PathNotFound') {
-                Write-Error -Message "[-] $($Script:LocalizedData.ErrorUtilitySettingsFileDoesNotExistsMode -f $Mode, 'SetMailerSetting')"
+                Write-IgugaColorOutput "[-] $($Script:LocalizedData.ErrorUtilitySettingsFileDoesNotExistsMode -f $Mode, 'SetMailerSetting')" -ForegroundColor Red
                 return
             } else {
-                Write-Error -Message "[-] $($_.Exception)"
+                Write-IgugaColorOutput "[-] $($_.Exception)" -ForegroundColor Red
                 return
             }
         }

@@ -21,7 +21,7 @@ function Add-IgugaSetting {
         }
     }
 
-    if (Test-Path -LiteralPath $Path) {
+    if (Test-Path -LiteralPath $Path -PathType Leaf) {
         $storedSettings = Import-Clixml -Path $Path
         $storedSettings.Add($Key, @($type, $setting))
         $storedSettings | Export-Clixml -Path $Path
