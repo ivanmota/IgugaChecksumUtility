@@ -297,7 +297,7 @@ function IgugaChecksumUtility {
         }
     } elseif ($Mode -eq "SetMailerSetting") {
         if ($null -eq $MailerSetting) {
-            Write-IgugaColorOutputv "[-] $($Script:LocalizedData.ErrorUtilityParameterRequiredMode -f $Mode, 'MailerSetting')" -ForegroundColor Red
+            Write-IgugaColorOutput "[-] $($Script:LocalizedData.ErrorUtilityParameterRequiredMode -f $Mode, 'MailerSetting')" -ForegroundColor Red
             return
         } else {
             try {
