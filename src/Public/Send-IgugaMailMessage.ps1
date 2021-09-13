@@ -3,7 +3,7 @@ function Send-IgugaMailMessage {
     .SYNOPSIS
         Send an email using MailKit
     .DESCRIPTION
-        Send an email using the implementing the Microsoft-recommended MailKit library. This function only have support for Powershell version 7 or higher
+        Send an email using the Microsoft-recommended MailKit library. This function only have support for Powershell version 7 or higher
     .PARAMETER MailerSetting
         Sets the SMTP server host name to connect to
     .PARAMETER From

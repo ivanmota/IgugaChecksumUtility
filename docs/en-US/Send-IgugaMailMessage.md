@@ -20,7 +20,7 @@ Send-IgugaMailMessage [-MailerSetting] <IgugaMailerSetting> [-From] <IgugaMailAd
 ```
 
 ## DESCRIPTION
-Send an email using the implementing the Microsoft-recommended MailKit library.
+Send an email using the Microsoft-recommended MailKit library.
 This function only have support for Powershell version 7 or higher
 
 ## EXAMPLES
