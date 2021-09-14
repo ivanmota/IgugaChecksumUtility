@@ -328,14 +328,14 @@ function IgugaChecksumUtility {
         try {
             $settings = Get-IgugaMailerSetting -SettingsFilePath $SettingsFilePath
             Write-IgugaColorOutput ""
-            Write-IgugaColorOutput "SMTP Server: $($settings.SMTPServer)"
-            Write-IgugaColorOutput "Port: $($settings.Port)"
+            Write-IgugaColorOutput "$($Script:LocalizedData.ShowMailerSettingSmtpServer -f $settings.SMTPServer)"
+            Write-IgugaColorOutput "$($Script:LocalizedData.ShowMailerSettingPort -f $settings.Port)"
             if ($settings.Credential) {
-                Write-IgugaColorOutput "Username: $($settings.Credential.Username)"
-                Write-IgugaColorOutput "Password: *************"
+                Write-IgugaColorOutput "$($Script:LocalizedData.ShowMailerSettingUsername -f $settings.Credential.Username)"
+                Write-IgugaColorOutput "$($Script:LocalizedData.ShowMailerSettingPassword -f '****************')"
             }
-            Write-IgugaColorOutput "Encryption: $($settings.Encryption)"
-            Write-IgugaColorOutput "File Path: $($SettingsFilePath)"
+            Write-IgugaColorOutput "$($Script:LocalizedData.ShowMailerSettingEncryption -f $settings.Encryption)"
+            Write-IgugaColorOutput "$($Script:LocalizedData.ShowMailerSettingFilePath -f $SettingsFilePath)"
             Write-IgugaColorOutput ""
         } catch {
             if ($_.FullyQualifiedErrorId -eq 'PathNotFound') {
@@ -378,18 +378,18 @@ function IgugaChecksumUtility {
         if (($Mode -eq 'Validate') -and $SendNotification) {
             $MailerSetting = Get-IgugaMailerSetting -SettingsFilePath $SettingsFilePath
 
-            $TextBody = "Hi there,`n"
+            $TextBody = "$($Script:LocalizedData.ValidationEmailNotificationGreetings)`n"
             $TextBody += "`n"
-            $TextBody += "Please find below the validation results:`n"
-            $TextBody += " - Total of Items: $($Script:TotalOfItems)`n"
-            $TextBody += " - Passed: $($Script:ReportItemsValid)`n"
-            $TextBody += " - Failed: $($Script:ReportItemsInvalid)`n"
-            $TextBody += " - File not found: $($Script:ReportItemsFileNotFound)`n"
+            $TextBody += "$($Script:LocalizedData.ValidationEmailNotificationInstructions)`n"
+            $TextBody += "$($Script:LocalizedData.ValidationEmailNotificationTotalItems) $($Script:TotalOfItems)`n"
+            $TextBody += "$($Script:LocalizedData.ValidationEmailNotificationTotalPassed) $($Script:ReportItemsValid)`n"
+            $TextBody += "$($Script:LocalizedData.ValidationEmailNotificationTotalFailed) $($Script:ReportItemsInvalid)`n"
+            $TextBody += "$($Script:LocalizedData.ValidationEmailNotificationTotalFileNotFound) $($Script:ReportItemsFileNotFound)`n"
             $TextBody += "`n"
-            $TextBody += "For more information please find attached the report.`n"
+            $TextBody += "$($Script:LocalizedData.ValidationEmailNotificationMoreInfo)`n"
             $TextBody += "`n"
             $TextBody += "---`n"
-            $TextBody += "$($MyInvocation.MyCommand.Module.Name)`n"
+            $TextBody += "$($Script:LocalizedData.ValidationEmailNotificationSignature -f $MyInvocation.MyCommand.Module.Name)`n"
 
             $Parameters = @{
                 MailerSetting = $MailerSetting
@@ -397,7 +397,7 @@ function IgugaChecksumUtility {
                 ToList = $ToList
                 CcList = $CcList
                 BccList = $BccList
-                Subject = "$($MyInvocation.MyCommand.Module.Name) - Validation Results"
+                Subject = $Script:LocalizedData.ValidationEmailNotificationSubject -f $MyInvocation.MyCommand.Module.Name
                 TextBody = $TextBody
                 AttachmentList = @($OutputFilePath)
             }

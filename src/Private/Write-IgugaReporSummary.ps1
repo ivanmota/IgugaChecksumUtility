@@ -41,45 +41,45 @@ function Write-IgugaReporSummary() {
     if ($Footer.IsPresent) {
         $FooterNotes = @(
             "",
-            "Ended at: $((Get-Date).ToString("yyyy-MM-dd HH:mm:ss"))",
-            "Operation Mode: $Mode"
+            "$($Script:LocalizedData.ReportSummaryEndedAt -f $(Get-Date).ToString("yyyy-MM-dd HH:mm:ss"))",
+            "$($Script:LocalizedData.ReportSummaryOperationMode -f $Mode)"
         );
 
         if ($Mode -eq "Compare") {
             $FooterNotes = @(
                 "",
-                "Ended at: $((Get-Date).ToString("yyyy-MM-dd HH:mm:ss"))",
-                "Operation Mode: $Mode",
-                "File Path: $Path",
-                "Checksum Algorithm: $Algorithm"
+                "$($Script:LocalizedData.ReportSummaryEndedAt -f $(Get-Date).ToString("yyyy-MM-dd HH:mm:ss"))",
+                "$($Script:LocalizedData.ReportSummaryOperationMode -f $Mode)",
+                "$($Script:LocalizedData.ReportSummaryFilePath -f $Path)",
+                "$($Script:LocalizedData.ReportSummaryChecksumAlgorithm -f $Algorithm)"
             );
         } elseif ($Mode -eq "Generate") {
             $FooterNotes = @(
                 ""
-                "Ended at: $((Get-Date).ToString("yyyy-MM-dd HH:mm:ss"))",
-                "Operation Mode: $Mode",
-                "Total of Items: $($Script:TotalOfItems)",
-                "Generated: $($Script:ReportItemsGenerated)",
-                "FileNotFound: $($Script:ReportItemsFileNotFound)",
-                "Path: $Path",
-                "Checksum Algorithm: $Algorithm"
+                "$($Script:LocalizedData.ReportSummaryEndedAt -f $(Get-Date).ToString("yyyy-MM-dd HH:mm:ss"))",
+                "$($Script:LocalizedData.ReportSummaryOperationMode -f $Mode)",
+                "$($Script:LocalizedData.ReportSummaryTotalOfItems -f $Script:TotalOfItems)",
+                "$($Script:LocalizedData.ReportSummaryTotalGenerated -f $Script:ReportItemsGenerated)",
+                "$($Script:LocalizedData.ReportSummaryTotalFileNotFound -f $Script:ReportItemsFileNotFound)",
+                "$($Script:LocalizedData.ReportSummaryPath -f $Path)",
+                "$($Script:LocalizedData.ReportSummaryChecksumAlgorithm -f $Algorithm)"
             );
         } elseif ($Mode -eq "Validate") {
             $FooterNotes = @(
                 ""
-                "Ended at: $((Get-Date).ToString("yyyy-MM-dd HH:mm:ss"))",
-                "Operation Mode: $Mode",
-                "Total of Items: $($Script:TotalOfItems)",
-                "Passed: $($Script:ReportItemsValid)",
-                "Failed: $($Script:ReportItemsInvalid)",
-                "FileNotFound: $($Script:ReportItemsFileNotFound)",
-                "Checksum File Path: $Path",
-                "Checksum Algorithm: $Algorithm"
+                "$($Script:LocalizedData.ReportSummaryEndedAt -f $(Get-Date).ToString("yyyy-MM-dd HH:mm:ss"))",
+                "$($Script:LocalizedData.ReportSummaryOperationMode -f $Mode)",
+                "$($Script:LocalizedData.ReportSummaryTotalOfItems -f $Script:TotalOfItems)",
+                "$($Script:LocalizedData.ReportSummaryTotalPassed -f $Script:ReportItemsValid)",
+                "$($Script:LocalizedData.ReportSummaryTotalFailed -f $Script:ReportItemsInvalid)",
+                "$($Script:LocalizedData.ReportSummaryTotalFileNotFound -f $Script:ReportItemsFileNotFound)",
+                "$($Script:LocalizedData.ReportSummaryChecksumFilePath -f $Path)",
+                "$($Script:LocalizedData.ReportSummaryChecksumAlgorithm -f $Algorithm)"
             );
         }
 
         if ($HasOutput) {
-            $FooterNotes += "Output File Path: $OutputFilePath";
+            $FooterNotes += "$($Script:LocalizedData.ReportSummaryOutputFilePath -f $OutputFilePath)";
         }
 
         for ($i = 0; $i -lt $FooterNotes.Count; $i++) {
@@ -96,12 +96,12 @@ function Write-IgugaReporSummary() {
     }
 
     $HeaderNotes = @(
-        "Agent: $($MyInvocation.MyCommand.Module.Name)",
-        "Version: $($MyInvocation.MyCommand.Module.Version.ToString())",
-        "Description: $($MyInvocation.MyCommand.Module.Description)",
-        "Project Url: $($MyInvocation.MyCommand.Module.ProjectUri)",
-        "Author: $($MyInvocation.MyCommand.Module.Author)",
-        "Started at: $((Get-Date).ToString("yyyy-MM-dd HH:mm:ss"))",
+        "$($Script:LocalizedData.ReportSummaryAgent -f $MyInvocation.MyCommand.Module.Name)",
+        "$($Script:LocalizedData.ReportSummaryVersion -f $MyInvocation.MyCommand.Module.Version.ToString())",
+        "$($Script:LocalizedData.ReportSummaryDescription -f $MyInvocation.MyCommand.Module.Description)",
+        "$($Script:LocalizedData.ReportSummaryProjectUrl -f $MyInvocation.MyCommand.Module.ProjectUri)",
+        "$($Script:LocalizedData.ReportSummaryAuthor -f $MyInvocation.MyCommand.Module.Author)",
+        "$($Script:LocalizedData.ReportSummaryStartedAt -f $(Get-Date).ToString("yyyy-MM-dd HH:mm:ss"))",
         ""
     );
 
