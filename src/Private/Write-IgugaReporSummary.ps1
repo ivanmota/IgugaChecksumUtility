@@ -55,7 +55,7 @@ function Write-IgugaReporSummary() {
             );
         } elseif ($Mode -eq "Generate") {
             $FooterNotes = @(
-                ""
+                "",
                 "$($Script:LocalizedData.ReportSummaryEndedAt -f $(Get-Date).ToString("yyyy-MM-dd HH:mm:ss"))",
                 "$($Script:LocalizedData.ReportSummaryOperationMode -f $Mode)",
                 "$($Script:LocalizedData.ReportSummaryTotalOfItems -f $Script:TotalOfItems)",
@@ -66,7 +66,7 @@ function Write-IgugaReporSummary() {
             );
         } elseif ($Mode -eq "Validate") {
             $FooterNotes = @(
-                ""
+                "",
                 "$($Script:LocalizedData.ReportSummaryEndedAt -f $(Get-Date).ToString("yyyy-MM-dd HH:mm:ss"))",
                 "$($Script:LocalizedData.ReportSummaryOperationMode -f $Mode)",
                 "$($Script:LocalizedData.ReportSummaryTotalOfItems -f $Script:TotalOfItems)",

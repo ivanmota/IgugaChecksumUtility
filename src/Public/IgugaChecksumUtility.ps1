@@ -397,7 +397,7 @@ function IgugaChecksumUtility {
                 ToList = $ToList
                 CcList = $CcList
                 BccList = $BccList
-                Subject = $Script:LocalizedData.ValidationEmailNotificationSubject -f $MyInvocation.MyCommand.Module.Name
+                Subject = "$($Script:LocalizedData.ValidationEmailNotificationSubject -f $MyInvocation.MyCommand.Module.Name)"
                 TextBody = $TextBody
                 AttachmentList = @($OutputFilePath)
             }
