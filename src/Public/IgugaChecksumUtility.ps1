@@ -404,7 +404,6 @@ function IgugaChecksumUtility {
 
             Send-IgugaMailMessage @Parameters
             Write-IgugaColorOutput "[+] $($Script:LocalizedData.EmailNotificationSentWithSuccess)"
-            Write-IgugaReportContent -Text $($Script:LocalizedData.SetSettingSuccess -f 'MailerSetting') -ForegroundColor Green -OutputFilePath $OutputFilePath -Silent:$Silent
         }
 
         if (-not($OutputFilePathDefinedByUser) -and (Test-Path -LiteralPath $OutputFilePath -PathType Leaf)) {
