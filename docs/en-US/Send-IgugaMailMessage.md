@@ -29,7 +29,7 @@ This function only have support for Powershell version 7 or higher
 ```
 # How to send a simple email
 using module IgugaChecksumUtility
-$Credential = [PSCredential]::new("example@gmail.com", (ConvertTo-SecureString -String 'password-example' -AsPlainText -Force))
+$Credential = Get-Credential -Message "Please enter the SMTP Server username and password."
 $MailerSetting = [IgugaMailerSetting]::new("smtp.gmail.com", 587, $Credential)
 $From = [IgugaMailAddress]::new("My Name", "example@gmail.com")
 $ToList = @([IgugaMailAddress]::new("name@example.com"))

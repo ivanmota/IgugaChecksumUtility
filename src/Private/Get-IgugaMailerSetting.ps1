@@ -11,7 +11,7 @@ function Get-IgugaMailerSetting {
         throw [IgugaError]::PathNotFound($Script:LocalizedData.ErrorSettingsFileNotFound, $Path)
     }
 
-    $Settings = [IgugaMailerSetting]::new();
+    $Settings = [IgugaMailerSetting]::new()
 
     $Username = Get-IgugaSetting -Path $SettingsFilePath -Key "IgugaMailerUsername"
     $Password = Get-IgugaSetting -Path $SettingsFilePath -Key "IgugaMailerPassword" -ReturnSecureString
@@ -28,5 +28,5 @@ function Get-IgugaMailerSetting {
         throw [IgugaError]::InvalidSetting($Script:LocalizedData.ErrorInvalidSetting, "IgugaMailerSMTPServer")
     }
 
-    return $Settings;
+    return $Settings
 }

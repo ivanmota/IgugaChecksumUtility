@@ -37,7 +37,7 @@ function Test-IgugaChecksumFile {
         $Silent
     )
 
-    $Results = @();
+    $Results = @()
 
     $WindowsDirSep = [System.IO.Path]::DirectorySeparatorChar
     $LinuxDirSep = [System.IO.Path]::AltDirectorySeparatorChar
@@ -53,20 +53,20 @@ function Test-IgugaChecksumFile {
         Get-Content -LiteralPath $FilePath | ForEach-Object {
             if (-not($Silent.IsPresent)) {
                 $runningChar = if ($runningChar -eq "/") { "\" } else { "/" }
-                Write-Progress -Activity $($Script:LocalizedData.ValidateOpProgressMessage -f $FilePath) -Status $($Script:LocalizedData.ValidateOpProgressStatus -f $runningChar);
+                Write-Progress -Activity $($Script:LocalizedData.ValidateOpProgressMessage -f $FilePath) -Status $($Script:LocalizedData.ValidateOpProgressStatus -f $runningChar)
             }
 
-            $SplitChecksum = $_.Split("  ", 2);
-            $CurrentStoredHash = $SplitChecksum[0].Trim().ToUpper();
-            $CurrentStoredFilePath = $SplitChecksum[1].Trim();
+            $SplitChecksum = $_.Split("  ", 2)
+            $CurrentStoredHash = $SplitChecksum[0].Trim().ToUpper()
+            $CurrentStoredFilePath = $SplitChecksum[1].Trim()
 
             # Check if the file path is relative
             if (-not([System.IO.Path]::IsPathRooted($CurrentStoredFilePath))) {
                 if ([string]::IsNullOrWhiteSpace($BasePath)) {
-                    $BasePath = (Get-Item -LiteralPath $FilePath).Directory.FullName;
+                    $BasePath = (Get-Item -LiteralPath $FilePath).Directory.FullName
                 }
 
-                $CurrentStoredFilePath = Join-Path -Path $BasePath -ChildPath $CurrentStoredFilePath;
+                $CurrentStoredFilePath = Join-Path -Path $BasePath -ChildPath $CurrentStoredFilePath
             }
 
             $CurrentStoredFilePath = $CurrentStoredFilePath.Replace($WindowsDirSep, $LinuxDirSep).TrimEnd($LinuxDirSep)
@@ -77,7 +77,7 @@ function Test-IgugaChecksumFile {
                     $Results += [IgugaValidateResult]::new($CurrentStoredFilePath, "PASS", $CurrentStoredHash, $ReturnedHash)
                 }
                 else {
-                    $Results += [IgugaValidateResult]::new($CurrentStoredFilePath, "FAIL", $CurrentStoredHash, $ReturnedHash);
+                    $Results += [IgugaValidateResult]::new($CurrentStoredFilePath, "FAIL", $CurrentStoredHash, $ReturnedHash)
                 }
             } else {
                 $Results += [IgugaValidateResult]::new($CurrentStoredFilePath, "NOT_FOUND")
@@ -85,7 +85,7 @@ function Test-IgugaChecksumFile {
         }
 
         if (($Results.Length -gt 0) -and -not($Silent.IsPresent)) {
-            Write-Progress -Activity $Script:LocalizedData.ValidateOpProgressCompleted -Completed;
+            Write-Progress -Activity $Script:LocalizedData.ValidateOpProgressCompleted -Completed
         }
     } else {
         throw [IgugaError]::PathNotFound($Script:LocalizedData.ErrorPathNotFound, $FilePath)

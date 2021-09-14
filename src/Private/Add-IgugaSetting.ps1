@@ -14,7 +14,7 @@ function Add-IgugaSetting {
     switch ($type = $Value.GetType().Name) {
         'securestring' {
             $setting = $Value | ConvertFrom-SecureString
-            break;
+            break
         }
         default {
             $setting = $Value

@@ -66,7 +66,7 @@ function IgugaChecksumUtility {
         # Perform a validate operation on a checksum file when the paths inside the file being validated is located on a different path and send an email notification (only supported on PS 7 or higher) if there is any failed validation or file not found
         # First we need to set the Mailer settings. We just need to do this once. All this info will be stored on the user local computer.
         using module IgugaChecksumUtility
-        $Credential = [PSCredential]::new("my.name@gmail.com", (ConvertTo-SecureString -String 'my-password' -AsPlainText -Force))
+        $Credential = Get-Credential -Message "Please enter the SMTP Server username and password."
         $MailerSetting = [IgugaMailerSetting]::new("smtp.gmail.com", 587, $Credential)
         IgugaChecksumUtility -Mode SetMailerSetting -MailerSetting $MailerSetting
         # You can see all the Mailer settings and where the data is located if you run the following PS command line
@@ -74,8 +74,8 @@ function IgugaChecksumUtility {
         # If you wich to remove the Mailer setting, then run the follow PS command line
         IgugaChecksumUtility -Mode RemoveMailerSetting
         # Then, define the sender(From) and the recipents (ToList) and run the validation
-        $From = [IgugaMailAddress]::new("My Name", "my.name@gmail.com");
-        $ToList = @([IgugaMailAddress]::new("name1@example.com"), [IgugaMailAddress]::new("name2@example.com"));
+        $From = [IgugaMailAddress]::new("My Name", "my.name@gmail.com")
+        $ToList = @([IgugaMailAddress]::new("name1@example.com"), [IgugaMailAddress]::new("name2@example.com"))
         IgugaChecksumUtility -Mode Validate -Path "\\server1\checksums\apps\SHA256SUMS.txt" -BasePath "C:\Apps" -Algorithm SHA512 -SendMailNotification NotSuccess -From $From -ToList $ToList
     .EXAMPLE
         # Perform a compare operation on a file with a known hash
@@ -159,18 +159,18 @@ function IgugaChecksumUtility {
 
         if ([string]::IsNullOrWhiteSpace($Path)) {
             Write-IgugaColorOutput "[-] $($Script:LocalizedData.ErrorUtilityParameterRequiredMode -f $Mode, 'Path')" -ForegroundColor Red
-            return;
+            return
         }
 
         if (-not(Test-Path -LiteralPath $Path -PathType Any)) {
             Write-IgugaColorOutput "[-] $($Script:LocalizedData.ErrorUtilityPathNotFound -f $Mode, $Path)" -ForegroundColor Red
-            return;
+            return
         }
     }
 
-    $OutputFilePathDefinedByUser = $true;
+    $OutputFilePathDefinedByUser = $true
     if ([string]::IsNullOrWhiteSpace($OutFilePath)) {
-        $OutputFilePathDefinedByUser = $false;
+        $OutputFilePathDefinedByUser = $false
     }
 
     if (-not($SendEmailNotification -eq "None")) {
@@ -181,7 +181,7 @@ function IgugaChecksumUtility {
 
         if (-not(Test-Path -LiteralPath $SettingsFilePath -PathType Leaf)) {
             Write-IgugaColorOutput -Message "[-] $($Script:LocalizedData.ErrorUtilitySettingsFileDoesNotExists -f 'SendEmailNotification', 'SetMailerSetting')" -ForegroundColor Red
-            return;
+            return
         }
 
         if ($null -eq $From) {
@@ -210,17 +210,17 @@ function IgugaChecksumUtility {
                     "PASS" {
                         $Script:ReportItemsValid++
                         Write-IgugaReportContent -Text $($Script:LocalizedData.ValidationPassed -f $Result.FilePath) -ForegroundColor Green -OutputFilePath $OutputFilePath -Silent:$Silent
-                        break;
+                        break
                     }
                     "FAIL" {
                         $Script:ReportItemsInvalid++
                         Write-IgugaReportContent -Text $($Script:LocalizedData.ValidationFailed -f $Result.FilePath, $Result.Hash, $Result.ExpectedHash) -ForegroundColor Red -OutputFilePath $OutputFilePath -Silent:$Silent
-                        break;
+                        break
                     }
                     "NOT_FOUND" {
                         $Script:ReportItemsFileNotFound++
                         Write-IgugaReportContent -Text "[-] $($Script:LocalizedData.ErrorUtilityValidateFileNotFound -f $Result.FilePath)" -ForegroundColor Red -OutputFilePath $OutputFilePath -Silent:$Silent
-                        break;
+                        break
                     }
                 }
             }
@@ -236,12 +236,12 @@ function IgugaChecksumUtility {
                 "PASS" {
                     $Script:ReportItemsValid++
                     Write-IgugaReportContent -Text $($Script:LocalizedData.ValidationPassed -f $Result.FilePath) -ForegroundColor Green -OutputFilePath $OutputFilePath -Silent:$Silent
-                    break;
+                    break
                 }
                 "FAIL" {
                     $Script:ReportItemsInvalid++
                     Write-IgugaReportContent -Text $($Script:LocalizedData.ValidationFailed -f $Result.FilePath, $Result.Hash, $Result.ExpectedHash) -ForegroundColor Red -OutputFilePath $OutputFilePath -Silent:$Silent
-                    break;
+                    break
                 }
             }
         } catch {
@@ -287,19 +287,19 @@ function IgugaChecksumUtility {
                 $OutFilePath = Join-Path -Path $Path -ChildPath $OutFileName
             }
             if (Test-Path -LiteralPath $OutFilePath -PathType Leaf) {
-                Remove-Item $OutFilePath;
+                Remove-Item $OutFilePath
             }
         }
 
         if (-not($Silent.IsPresent))
         {
-            Write-Progress -Activity $Script:LocalizedData.PrintChecksumProgressMessage -Status $Script:LocalizedData.PrintChecksumProgressStatus;
+            Write-Progress -Activity $Script:LocalizedData.PrintChecksumProgressMessage -Status $Script:LocalizedData.PrintChecksumProgressStatus
         }
 
-        $Script:TotalOfItems = $Checksums.Length;
+        $Script:TotalOfItems = $Checksums.Length
 
         foreach ($Checksum in $Checksums) {
-            $Script:ReportItemsGenerated++;
+            $Script:ReportItemsGenerated++
             if ($OutFile.IsPresent) {
                 Add-Content $OutFilePath $Checksum.Checksum
             }

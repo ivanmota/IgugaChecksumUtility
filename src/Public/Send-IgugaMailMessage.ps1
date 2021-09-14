@@ -25,7 +25,7 @@ function Send-IgugaMailMessage {
     .EXAMPLE
         # How to send a simple email
         using module IgugaChecksumUtility
-        $Credential = [PSCredential]::new("example@gmail.com", (ConvertTo-SecureString -String 'password-example' -AsPlainText -Force))
+        $Credential = Get-Credential -Message "Please enter the SMTP Server username and password."
         $MailerSetting = [IgugaMailerSetting]::new("smtp.gmail.com", 587, $Credential)
         $From = [IgugaMailAddress]::new("My Name", "example@gmail.com")
         $ToList = @([IgugaMailAddress]::new("name@example.com"))
@@ -74,7 +74,7 @@ function Send-IgugaMailMessage {
         $ErrorActionPreference="Stop"
 
         if ($PSVersionTable.PSVersion.Major -lt 7) {
-            throw [IgugaError]::PSVersionFunctionNotSupported($Script:LocalizedData.ErrorPSVersionFunctionNotSupported, "Send-IgugaMailMessage", "7.0");
+            throw [IgugaError]::PSVersionFunctionNotSupported($Script:LocalizedData.ErrorPSVersionFunctionNotSupported, "Send-IgugaMailMessage", "7.0")
         }
 
         #message

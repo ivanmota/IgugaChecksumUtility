@@ -48,7 +48,7 @@ IgugaChecksumUtility -Mode Validate -Path "\\server1\checksums\apps\SHA256SUMS.t
 
 # First we need to set the Mailer settings. We just need to do this once. All this info will be stored on the user local computer.
 using module IgugaChecksumUtility
-$Credential = [PSCredential]::new("my.name@gmail.com", (ConvertTo-SecureString -String 'my-password' -AsPlainText -Force))
+$Credential = Get-Credential -Message "Please enter the SMTP Server username and password."
 $MailerSetting = [IgugaMailerSetting]::new("smtp.gmail.com", 587, $Credential)
 IgugaChecksumUtility -Mode SetMailerSetting -MailerSetting $MailerSetting
 

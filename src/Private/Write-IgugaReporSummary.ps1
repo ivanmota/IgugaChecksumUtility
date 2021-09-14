@@ -88,11 +88,11 @@ function Write-IgugaReporSummary() {
             }
 
             if (-not([string]::IsNullOrWhiteSpace($FooterNotes[$i]))) {
-                Write-Verbose $FooterNotes[$i];
+                Write-Verbose $FooterNotes[$i]
             }
         }
 
-        return;
+        return
     }
 
     $HeaderNotes = @(
@@ -106,14 +106,14 @@ function Write-IgugaReporSummary() {
     )
 
     if ($HasOutput -and -not($OutputFileExists)) {
-        $null = New-Item -Path $OutputFilePath -ItemType File;
+        $null = New-Item -Path $OutputFilePath -ItemType File
     }
 
     for ($i = 0; $i -lt $HeaderNotes.Count; $i++) {
         if ($HasOutput) {
             if ($i -eq 0) {
                 Set-Content -LiteralPath $OutputFilePath -Value $HeaderNotes[$i]
-                continue;
+                continue
             }
             Add-Content -LiteralPath $OutputFilePath -Value $HeaderNotes[$i]
         }

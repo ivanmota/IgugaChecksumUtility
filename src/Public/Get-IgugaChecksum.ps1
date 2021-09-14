@@ -48,7 +48,7 @@ function Get-IgugaChecksum() {
         $AlternactiveFilePath = $AlternactiveFilePath.Substring(".$LinuxDirSep".Length)
     }
 
-    $Checksum = $FileResults.Hash + "  " + $AlternactiveFilePath;
+    $Checksum = $FileResults.Hash + "  " + $AlternactiveFilePath
 
     return [IgugaChecksum]::new($FileResults.Path.Replace($WindowsDirSep, $LinuxDirSep), $FileResults.Hash, $Checksum)
 }

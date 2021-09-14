@@ -22,10 +22,10 @@ function Write-IgugaReportContent() {
     )
 
     if (-not([string]::IsNullOrWhiteSpace($OutputFilePath))) {
-        Add-Content -LiteralPath $OutputFilePath -Value $Text;
+        Add-Content -LiteralPath $OutputFilePath -Value $Text
     }
 
     if (-not($Silent.IsPresent)) {
-        Write-IgugaColorOutput $Text -ForegroundColor $ForegroundColor;
+        Write-IgugaColorOutput $Text -ForegroundColor $ForegroundColor
     }
 }

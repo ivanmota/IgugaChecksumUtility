@@ -58,30 +58,30 @@ function Get-IgugaPathChecksum {
 
     $Checksums = @()
 
-    $Path = Get-IgugaCanonicalPath -Path $Path;
+    $Path = Get-IgugaCanonicalPath -Path $Path
 
     if (Test-Path -LiteralPath $Path -PathType Leaf) {
         if (-not($Silent.IsPresent))
         {
-            Write-Progress -Activity $Script:LocalizedData.GenerateOpProgressMessage -Status $Script:LocalizedData.GenerateOpProgressStatus;
+            Write-Progress -Activity $Script:LocalizedData.GenerateOpProgressMessage -Status $Script:LocalizedData.GenerateOpProgressStatus
         }
 
-        $AlternactiveFilePath = "";
-        $DirectoryPath = (Get-Item -LiteralPath $Path).Directory.FullName;
+        $AlternactiveFilePath = ""
+        $DirectoryPath = (Get-Item -LiteralPath $Path).Directory.FullName
         if (-not($UseAbsolutePath.IsPresent)) {
-            $AlternactiveFilePath = Get-IgugaRelativePath -RelativeTo $DirectoryPath -Path $Path;
+            $AlternactiveFilePath = Get-IgugaRelativePath -RelativeTo $DirectoryPath -Path $Path
         }
 
-        $Checksums += Get-IgugaChecksum -FilePath $Path -Algorithm $Algorithm -AlternactiveFilePath $AlternactiveFilePath;
+        $Checksums += Get-IgugaChecksum -FilePath $Path -Algorithm $Algorithm -AlternactiveFilePath $AlternactiveFilePath
 
         if (-not($Silent.IsPresent))
         {
-            Write-Progress -Activity $Script:LocalizedData.GenerateOpProgressCompleted -Completed;
+            Write-Progress -Activity $Script:LocalizedData.GenerateOpProgressCompleted -Completed
         }
     } else {
         if (-not($Silent.IsPresent))
         {
-            Write-Progress -Activity $($Script:LocalizedData.DiscoveringFilesProgressMessage -f $Path) -Status $Script:LocalizedData.DiscoveringFilesProgressStatus;
+            Write-Progress -Activity $($Script:LocalizedData.DiscoveringFilesProgressMessage -f $Path) -Status $Script:LocalizedData.DiscoveringFilesProgressStatus
         }
 
         $Parameters = @{
@@ -106,22 +106,22 @@ function Get-IgugaPathChecksum {
 
         if (-not($Silent.IsPresent))
         {
-            Write-Progress -Activity $Script:LocalizedData.DiscoveringFilesProgressCompleted -Completed;
+            Write-Progress -Activity $Script:LocalizedData.DiscoveringFilesProgressCompleted -Completed
         }
 
-        $i = 1;
+        $i = 1
         foreach ($File in $Files) {
             if (Test-Path -LiteralPath $File.FullName -PathType Leaf) {
-                $AlternactiveFilePath = "";
+                $AlternactiveFilePath = ""
                 if (-not($UseAbsolutePath.IsPresent)) {
-                    $AlternactiveFilePath = Get-IgugaRelativePath -RelativeTo $Path -Path $File.FullName;
+                    $AlternactiveFilePath = Get-IgugaRelativePath -RelativeTo $Path -Path $File.FullName
                 }
 
-                $Checksums += Get-IgugaChecksum -FilePath $File.FullName -Algorithm $Algorithm -AlternactiveFilePath $AlternactiveFilePath;
+                $Checksums += Get-IgugaChecksum -FilePath $File.FullName -Algorithm $Algorithm -AlternactiveFilePath $AlternactiveFilePath
 
                 if (-not($Silent.IsPresent))
                 {
-                    Write-Progress -Activity $($Script:LocalizedData.GenerateOpProgressMessage -f $File.FullName) -Status $($Script:LocalizedData.GenerateOpCounterProgressStatus -f $i, $Files.Count) -PercentComplete (($i / $Files.Count) * 100);
+                    Write-Progress -Activity $($Script:LocalizedData.GenerateOpProgressMessage -f $File.FullName) -Status $($Script:LocalizedData.GenerateOpCounterProgressStatus -f $i, $Files.Count) -PercentComplete (($i / $Files.Count) * 100)
                     $i++
                 }
             }

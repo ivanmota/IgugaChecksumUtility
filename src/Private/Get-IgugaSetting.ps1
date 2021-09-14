@@ -21,7 +21,7 @@ function Get-IgugaSetting {
                         $cred = (New-Object -TypeName PSCredential -ArgumentList 'jpgr', $value)
                         $cred.GetNetworkCredential().Password
                     }
-                    break;
+                    break
                 }
                 default {
                     $securedSettings.$Key[1]
