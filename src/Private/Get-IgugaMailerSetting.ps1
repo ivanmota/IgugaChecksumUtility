@@ -25,7 +25,7 @@ function Get-IgugaMailerSetting {
     }
 
     if ([string]::IsNullOrWhiteSpace($Settings.SMTPServer)) {
-        throw [IgugaError]::InvalidSetting($Script:LocalizedData.ErrorInvalidSetting, "IgugaMailerSMTPServer");
+        throw [IgugaError]::InvalidSetting($Script:LocalizedData.ErrorInvalidSetting, "IgugaMailerSMTPServer")
     }
 
     return $Settings;

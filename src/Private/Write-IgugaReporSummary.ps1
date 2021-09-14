@@ -26,16 +26,16 @@ function Write-IgugaReporSummary() {
         $Footer
     )
 
-    $HasOutput = $false;
-    $OutputFileExists = $false;
+    $HasOutput = $false
+    $OutputFileExists = $false
     if (-not([string]::IsNullOrWhiteSpace($OutputFilePath))) {
-        $OutputFileExists = Test-Path -LiteralPath $OutputFilePath -PathType Leaf;
+        $OutputFileExists = Test-Path -LiteralPath $OutputFilePath -PathType Leaf
         $OutputFilePath = if ($OutputFileExists) {
             Get-IgugaCanonicalPath -Path $OutputFilePath
         } else {
-            Get-IgugaCanonicalPath -Path $OutputFilePath -NonExistentPath;
+            Get-IgugaCanonicalPath -Path $OutputFilePath -NonExistentPath
         }
-        $HasOutput = $true;
+        $HasOutput = $true
     }
 
     if ($Footer.IsPresent) {
@@ -43,7 +43,7 @@ function Write-IgugaReporSummary() {
             "",
             "$($Script:LocalizedData.ReportSummaryEndedAt -f $(Get-Date).ToString("yyyy-MM-dd HH:mm:ss"))",
             "$($Script:LocalizedData.ReportSummaryOperationMode -f $Mode)"
-        );
+        )
 
         if ($Mode -eq "Compare") {
             $FooterNotes = @(
@@ -52,7 +52,7 @@ function Write-IgugaReporSummary() {
                 "$($Script:LocalizedData.ReportSummaryOperationMode -f $Mode)",
                 "$($Script:LocalizedData.ReportSummaryFilePath -f $Path)",
                 "$($Script:LocalizedData.ReportSummaryChecksumAlgorithm -f $Algorithm)"
-            );
+            )
         } elseif ($Mode -eq "Generate") {
             $FooterNotes = @(
                 "",
@@ -63,7 +63,7 @@ function Write-IgugaReporSummary() {
                 "$($Script:LocalizedData.ReportSummaryTotalFileNotFound -f $Script:ReportItemsFileNotFound)",
                 "$($Script:LocalizedData.ReportSummaryPath -f $Path)",
                 "$($Script:LocalizedData.ReportSummaryChecksumAlgorithm -f $Algorithm)"
-            );
+            )
         } elseif ($Mode -eq "Validate") {
             $FooterNotes = @(
                 "",
@@ -75,16 +75,16 @@ function Write-IgugaReporSummary() {
                 "$($Script:LocalizedData.ReportSummaryTotalFileNotFound -f $Script:ReportItemsFileNotFound)",
                 "$($Script:LocalizedData.ReportSummaryChecksumFilePath -f $Path)",
                 "$($Script:LocalizedData.ReportSummaryChecksumAlgorithm -f $Algorithm)"
-            );
+            )
         }
 
         if ($HasOutput) {
-            $FooterNotes += "$($Script:LocalizedData.ReportSummaryOutputFilePath -f $OutputFilePath)";
+            $FooterNotes += "$($Script:LocalizedData.ReportSummaryOutputFilePath -f $OutputFilePath)"
         }
 
         for ($i = 0; $i -lt $FooterNotes.Count; $i++) {
             if ($HasOutput) {
-                Add-Content -LiteralPath $OutputFilePath -Value $FooterNotes[$i];
+                Add-Content -LiteralPath $OutputFilePath -Value $FooterNotes[$i]
             }
 
             if (-not([string]::IsNullOrWhiteSpace($FooterNotes[$i]))) {
@@ -103,7 +103,7 @@ function Write-IgugaReporSummary() {
         "$($Script:LocalizedData.ReportSummaryAuthor -f $MyInvocation.MyCommand.Module.Author)",
         "$($Script:LocalizedData.ReportSummaryStartedAt -f $(Get-Date).ToString("yyyy-MM-dd HH:mm:ss"))",
         ""
-    );
+    )
 
     if ($HasOutput -and -not($OutputFileExists)) {
         $null = New-Item -Path $OutputFilePath -ItemType File;
@@ -112,14 +112,14 @@ function Write-IgugaReporSummary() {
     for ($i = 0; $i -lt $HeaderNotes.Count; $i++) {
         if ($HasOutput) {
             if ($i -eq 0) {
-                Set-Content -LiteralPath $OutputFilePath -Value $HeaderNotes[$i];
+                Set-Content -LiteralPath $OutputFilePath -Value $HeaderNotes[$i]
                 continue;
             }
-            Add-Content -LiteralPath $OutputFilePath -Value $HeaderNotes[$i];
+            Add-Content -LiteralPath $OutputFilePath -Value $HeaderNotes[$i]
         }
 
         if (-not([string]::IsNullOrWhiteSpace($HeaderNotes[$i]))) {
-            Write-Verbose $HeaderNotes[$i];
+            Write-Verbose $HeaderNotes[$i]
         }
     }
 }

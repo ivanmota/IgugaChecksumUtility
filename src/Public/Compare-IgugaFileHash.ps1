@@ -19,9 +19,7 @@ function Compare-IgugaFileHash {
     [OutputType([IgugaValidateResult])]
     [CmdletBinding()]
     Param(
-        [Parameter(Position = 0,
-        Mandatory = $true,
-        HelpMessage = "The path to a given file")]
+        [Parameter(Position = 0, Mandatory = $true, HelpMessage = "The path to a given file")]
         [string]
         $FilePath,
 
@@ -36,15 +34,13 @@ function Compare-IgugaFileHash {
         $Silent
     )
 
-    $Result;
-
     if (Test-Path -LiteralPath $FilePath -PathType Leaf) {
         if ($Hash) {
             if (-not($Silent.IsPresent)) {
-                Write-Progress -Activity $($Script:LocalizedData.CompareOpProgressMessage -f $FilePath) -Status $Script:LocalizedData.CompareOpProgressStatus;
+                Write-Progress -Activity $($Script:LocalizedData.CompareOpProgressMessage -f $FilePath) -Status $Script:LocalizedData.CompareOpProgressStatus
             }
 
-            $Hash = $Hash.Trim().ToUpper();
+            $Hash = $Hash.Trim().ToUpper()
 
             $Checksum = Get-IgugaChecksum -FilePath $FilePath -Algorithm $Algorithm
 
@@ -56,14 +52,14 @@ function Compare-IgugaFileHash {
             }
 
             if (-not($Silent.IsPresent)) {
-                Write-Progress -Activity $Script:LocalizedData.CompareOpProgressCompleted -Completed;
+                Write-Progress -Activity $Script:LocalizedData.CompareOpProgressCompleted -Completed
             }
         } else {
-            throw [IgugaError]::InvalidArgument($Script:LocalizedData.ErrorInvalidArgument, "Hash");
+            throw [IgugaError]::InvalidArgument($Script:LocalizedData.ErrorInvalidArgument, "Hash")
         }
     } else {
         throw [IgugaError]::PathNotFound($Script:LocalizedData.ErrorPathNotFound, $FilePath)
     }
 
-    return $Result;
+    return $Result
 }
