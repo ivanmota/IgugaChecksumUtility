@@ -56,12 +56,12 @@ function Get-IgugaCanonicalPath() {
     $IsDirectory = -not(Test-Path -LiteralPath $Path -PathType Leaf)
 
     $AdaptedPath = (Split-Path -Path $Path -NoQualifier).Replace($WindowsDirSep, $LinuxDirSep).Trim($LinuxDirSep)
-    $Parts = $AdaptedPath.Split($LinuxDirSep)
+    [string[]] $Parts = $AdaptedPath.Split($LinuxDirSep)
     # we should avoid to use (Split-Path -Path $Path -Qualifier) because it does not work with UNC Path
     $CanonicalPath = (Get-Item -Path $Path).PSDrive.Root
 
     if ([string]::IsNullOrEmpty($CanonicalPath)) {
-        if ($Parts.Count -ge 2 -and ($Path.StartsWith("\\") -or $Path.StartsWith("//"))) {
+        if (($Parts.Count -ge 2) -and ($Path.StartsWith("\\") -or $Path.StartsWith("//"))) {
             $CanonicalPath = $LinuxDirSep + $LinuxDirSep + $($Parts[0]) + $LinuxDirSep + $($Parts[1])
             $Parts = if ($Parts.Count -eq 2) {
                 @()
