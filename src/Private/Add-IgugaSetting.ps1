@@ -25,8 +25,7 @@ function Add-IgugaSetting {
         $storedSettings = Import-Clixml -Path $Path
         $storedSettings.Add($Key, @($type, $setting))
         $storedSettings | Export-Clixml -Path $Path
-    }
-    else {
+    } else {
         $parentDir = Split-Path -Path $Path -Parent
         if (!(Test-Path -LiteralPath $parentDir)) {
             New-Item $parentDir -ItemType Directory > $null

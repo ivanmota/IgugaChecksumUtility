@@ -149,6 +149,7 @@ Import-Module IgugaChecksumUtility
 To install this module using the project you will need to run the following powershell commands:
 
 ```powershell
+Import-Module .\src\IgugaChecksumUtility.psd1
 Invoke-psake build.psake.ps1 -taskList Install
 Import-Module IgugaChecksumUtility
 ```
