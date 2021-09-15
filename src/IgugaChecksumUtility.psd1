@@ -123,7 +123,7 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-        ReleaseNotes = 'Add support to send email on validation mode. Only available for PS 7'
+        ReleaseNotes = 'Add support to send email on validation mode. Only available for PS 7 or higher'
 
     } # End of PSData hashtable
 

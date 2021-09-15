@@ -12,5 +12,5 @@
 
 [1.0.7]
 
-- Add support to send email on validation mode. Only available for PS 7
+- Add support to send email on validation mode. Only available for PS 7 or higher
 - Fix some bugs
