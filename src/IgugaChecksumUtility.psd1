@@ -111,7 +111,7 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = @( 'checksum', 'MD5', 'SHA1', 'SHA256', 'SHA512', 'integrity')
+        Tags = @( 'checksum', 'hash', 'validate', 'generate', 'compare', 'integrity')
 
         # A URL to the license for this module.
         LicenseUri = 'https://github.com/ivanmota/IgugaChecksumUtility/blob/master/LICENSE.txt'

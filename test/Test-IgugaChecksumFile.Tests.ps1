@@ -5,6 +5,7 @@ BeforeAll {
     . $PSScriptRoot\Shared.ps1
     . $PSScriptRoot\..\src\Classes\IgugaError.ps1
     . $PSScriptRoot\..\src\Classes\IgugaValidateResult.ps1
+    . $PSScriptRoot\..\src\Private\Get-IgugaCanonicalPath.ps1
     . $PSScriptRoot\..\src\Public\Get-IgugaChecksum.ps1
     . $PSScriptRoot\..\src\Public\Test-IgugaChecksumFile.ps1
 }

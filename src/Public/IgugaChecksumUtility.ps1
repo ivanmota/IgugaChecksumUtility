@@ -166,6 +166,8 @@ function IgugaChecksumUtility {
             Write-IgugaColorOutput "[-] $($Script:LocalizedData.ErrorUtilityPathNotFound -f $Mode, $Path)" -ForegroundColor Red
             return
         }
+
+        $Path = Get-IgugaCanonicalPath -Path $Path
     }
 
     $OutputFilePathDefinedByUser = $true
@@ -197,6 +199,10 @@ function IgugaChecksumUtility {
         if (-not($OutputFilePathDefinedByUser)) {
             $OutputFilePath = Join-Path -Path $([System.IO.Path]::GetTempPath()) -ChildPath "IgugaChecksumReport.$(Get-Random).txt"
         }
+    }
+
+    if (-not([string]::IsNullOrWhiteSpace($OutputFilePath))) {
+        $OutputFilePath = Get-IgugaCanonicalPath -Path $OutputFilePath -NonExistentPath:$(-not(Test-Path -LiteralPath $OutputFilePath -PathType Leaf))
     }
 
     Write-IgugaReporSummary -Mode $Mode -OutputFilePath $OutputFilePath -Algorithm $Algorithm -Path $Path -Verbose:($PSBoundParameters['Verbose'] -eq $true)

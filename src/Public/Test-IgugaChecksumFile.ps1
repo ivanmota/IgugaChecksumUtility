@@ -46,6 +46,7 @@ function Test-IgugaChecksumFile {
         if (-not(Test-Path -LiteralPath $BasePath -PathType Container)) {
             throw [IgugaError]::PathNotFound($Script:LocalizedData.ErrorBasePathNotFound, $BasePath)
         }
+        $BasePath = Get-IgugaCanonicalPath -Path $BasePath
     }
 
     if (Test-Path -LiteralPath $FilePath -PathType Leaf) {

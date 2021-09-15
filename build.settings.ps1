@@ -98,7 +98,7 @@ Properties {
     # Select the hash version to use for the catalog file: 1 for SHA1 (compat with Windows 7 and
     # Windows Server 2008 R2), 2 for SHA2 to support only newer Windows versions.
     [System.Diagnostics.CodeAnalysis.SuppressMessage('PSUseDeclaredVarsMoreThanAssigments', '')]
-    $CatalogVersion = "2.0"
+    $CatalogVersion = 2
 
     # ---------------------- Testing properties -------------------------------
 
