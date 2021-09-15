@@ -277,12 +277,12 @@ Accept wildcard characters: False
 
 ### -SendEmailNotification
 Used with Validate mode, indicates in which condition a notification email should be sent after the validation process.
-Please note that the email notification only supported Powershell version 7 or higher.
+Please note that the email notification only support Powershell version 7 or higher.
 The allowed values are: None, Always, Success, NotSuccess.
-'None' means no notification mail will be sent.
-'Always' means a notification will be sent after each validation process.
-'Success' means a notification mail will be sent only if all file validation passed.
-'NotSuccess' means a notification mail will be sent if at least one file validation failed or not found.
+'None' means no notification email will be sent.
+'Always' means a notification email will be sent after each validation process.
+'Success' means a notification email will be sent only if all file validation passed.
+'NotSuccess' means a notification email will be sent if at least one file validation failed or not found.
 
 ```yaml
 Type: String
@@ -312,7 +312,7 @@ Accept wildcard characters: False
 ```
 
 ### -From
-Used with the parameter SendEmailNotification, sets the from mail address
+Used with the parameter SendEmailNotification, sets the from email address
 
 ```yaml
 Type: IgugaMailAddress
@@ -327,7 +327,7 @@ Accept wildcard characters: False
 ```
 
 ### -ToList
-Used with the parameter SendEmailNotification, sets the to list mail addresses
+Used with the parameter SendEmailNotification, sets the to list email addresses
 
 ```yaml
 Type: IgugaMailAddress[]
@@ -342,7 +342,7 @@ Accept wildcard characters: False
 ```
 
 ### -CcList
-Used with the parameter SendEmailNotification, sets the cc list mail addresses
+Used with the parameter SendEmailNotification, sets the cc list email addresses
 
 ```yaml
 Type: IgugaMailAddress[]
@@ -357,7 +357,7 @@ Accept wildcard characters: False
 ```
 
 ### -BccList
-Used with the parameter SendEmailNotification, sets the bcc list mail addresses
+Used with the parameter SendEmailNotification, sets the bcc list email addresses
 
 ```yaml
 Type: IgugaMailAddress[]

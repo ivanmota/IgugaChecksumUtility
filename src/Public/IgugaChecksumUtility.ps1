@@ -37,22 +37,22 @@ function IgugaChecksumUtility {
         Omitte the progress status and the output will not be printed on the console
     .PARAMETER SendEmailNotification
         Used with Validate mode, indicates in which condition a notification email should be sent after the validation process.
-        Please note that the email notification only supported Powershell version 7 or higher.
+        Please note that the email notification only support Powershell version 7 or higher.
         The allowed values are: None, Always, Success, NotSuccess.
-        'None' means no notification mail will be sent.
-        'Always' means a notification will be sent after each validation process.
-        'Success' means a notification mail will be sent only if all file validation passed.
-        'NotSuccess' means a notification mail will be sent if at least one file validation failed or not found.
+        'None' means no notification email will be sent.
+        'Always' means a notification email will be sent after each validation process.
+        'Success' means a notification email will be sent only if all file validation passed.
+        'NotSuccess' means a notification email will be sent if at least one file validation failed or not found.
     .PARAMETER MailerSetting
         Used with SetMailerSetting mode, sets the mailer settings
     .PARAMETER From
-        Used with the parameter SendEmailNotification, sets the from mail address
+        Used with the parameter SendEmailNotification, sets the from email address
     .PARAMETER ToList
-        Used with the parameter SendEmailNotification, sets the to list mail addresses
+        Used with the parameter SendEmailNotification, sets the to list email addresses
     .PARAMETER CcList
-        Used with the parameter SendEmailNotification, sets the cc list mail addresses
+        Used with the parameter SendEmailNotification, sets the cc list email addresses
     .PARAMETER BccList
-        Used with the parameter SendEmailNotification, sets the bcc list mail addresses
+        Used with the parameter SendEmailNotification, sets the bcc list email addresses
     .EXAMPLE
         # Checksum a single file, and output to console
         IgugaChecksumUtility -Mode Generate -Path C:\Test\File.docx
