@@ -56,6 +56,7 @@ function Get-IgugaCanonicalPath() {
     $IsDirectory = -not(Test-Path -LiteralPath $Path -PathType Leaf)
 
     $AdaptedPath = (Split-Path -Path $Path -NoQualifier).Replace($WindowsDirSep, $LinuxDirSep).Trim($LinuxDirSep)
+    # We need to define as array string ([string[]]) otherwise if there is just one item it could be considered as a string
     [string[]] $Parts = $AdaptedPath.Split($LinuxDirSep)
     # we should avoid to use (Split-Path -Path $Path -Qualifier) because it does not work with UNC Path
     $CanonicalPath = (Get-Item -Path $Path).PSDrive.Root
