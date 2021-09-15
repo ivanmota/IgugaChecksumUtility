@@ -34,31 +34,30 @@ function Compare-IgugaFileHash {
         $Silent
     )
 
-    if (Test-Path -LiteralPath $FilePath -PathType Leaf) {
-        if ($Hash) {
-            if (-not($Silent.IsPresent)) {
-                Write-Progress -Activity $($Script:LocalizedData.CompareOpProgressMessage -f $FilePath) -Status $Script:LocalizedData.CompareOpProgressStatus
-            }
-
-            $Hash = $Hash.Trim().ToUpper()
-
-            $Checksum = Get-IgugaChecksum -FilePath $FilePath -Algorithm $Algorithm
-
-            if ($Hash.Equals($Checksum.Hash)) {
-                $Result = [IgugaValidateResult]::new($Checksum.FilePath, "PASS", $Hash, $Checksum.Hash)
-            }
-            else {
-                $Result = [IgugaValidateResult]::new($Checksum.FilePath, "FAIL", $Hash, $Checksum.Hash)
-            }
-
-            if (-not($Silent.IsPresent)) {
-                Write-Progress -Activity $Script:LocalizedData.CompareOpProgressCompleted -Completed
-            }
-        } else {
-            throw [IgugaError]::InvalidArgument($Script:LocalizedData.ErrorInvalidArgument, "Hash")
-        }
-    } else {
+    if (-not(Test-Path -LiteralPath $FilePath -PathType Leaf)) {
         throw [IgugaError]::PathNotFound($Script:LocalizedData.ErrorPathNotFound, $FilePath)
+    }
+
+    if ([string]::IsNullOrWhiteSpace($Hash)) {
+        throw [IgugaError]::InvalidArgument($Script:LocalizedData.ErrorInvalidArgument, "Hash")
+    }
+
+    if (-not($Silent.IsPresent)) {
+        Write-Progress -Activity $($Script:LocalizedData.CompareOpProgressMessage -f $FilePath) -Status $Script:LocalizedData.CompareOpProgressStatus
+    }
+
+    $Hash = $Hash.Trim().ToUpper()
+
+    $Checksum = Get-IgugaChecksum -FilePath $FilePath -Algorithm $Algorithm
+
+    $Result = if ($Hash.Equals($Checksum.Hash)) {
+        [IgugaValidateResult]::new($Checksum.FilePath, "PASS", $Hash, $Checksum.Hash)
+    } else {
+        [IgugaValidateResult]::new($Checksum.FilePath, "FAIL", $Hash, $Checksum.Hash)
+    }
+
+    if (-not($Silent.IsPresent)) {
+        Write-Progress -Activity $Script:LocalizedData.CompareOpProgressCompleted -Completed
     }
 
     return $Result
