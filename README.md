@@ -136,7 +136,7 @@ And after that I will need to create a folder with the same name as the version 
 
 `C:\Users\ivan2562\Documents\WindowsPowerShell\Modules\IgugaChecksumUtility\1.0.7`
 
-Then I will need to copy all the content of the `Release` folder (folder generated when we build this module) to the above directory.
+Then I will need to copy all the content of the `Release\IgugaChecksumUtility` folder (folder generated when we build this module) to the above directory.
 
 And finally, we will need to run the following powershell commands to import this module:
 
@@ -158,7 +158,7 @@ The above commands will:
 
 1. Create the build;
 2. Create the module name and the current version folders on the current Powershell Modules directory of the current user;
-3. Copy all the `Release` folder content to it; and
+3. Copy all the `Release\IgugaChecksumUtility` folder content to it; and
 4. Proceed with the module import process.
 
 ## Execution Policy issues on Windows
