@@ -75,6 +75,7 @@ Please find below others function that this module export:
 2. Get-IgugaChecksum
 3. Get-IgugaPathChecksum
 4. Test-IgugaChecksumFile
+5. Send-IgugaMailMessage
 
 Find more info about those functions on the [docs](https://github.com/ivanmota/IgugaChecksumUtility/tree/master/docs) folder
 
