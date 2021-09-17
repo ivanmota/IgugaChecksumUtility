@@ -61,7 +61,7 @@ IgugaChecksumUtility -Mode RemoveMailerSetting
 # Then, define the sender(From) and the recipents (ToList) and run the validation
 $From = [IgugaMailAddress]::new("My Name", "my.name@gmail.com");
 $ToList = @([IgugaMailAddress]::new("name1@example.com"), [IgugaMailAddress]::new("name2@example.com"));
-IgugaChecksumUtility -Mode Validate -Path "\\server1\checksums\apps\SHA256SUMS.txt" -BasePath "C:\Apps" -Algorithm SHA512 -SendMailNotification NotSuccess -From $From -ToList $ToList
+IgugaChecksumUtility -Mode Validate -Path "\\server1\checksums\apps\SHA256SUMS.txt" -BasePath "C:\Apps" -Algorithm SHA512 -SendEmailNotification NotSuccess -From $From -ToList $ToList
 ```
 
 ```powershell
