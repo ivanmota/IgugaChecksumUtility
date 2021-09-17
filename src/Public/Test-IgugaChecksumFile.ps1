@@ -44,7 +44,7 @@ function Test-IgugaChecksumFile {
 
     if ($PSBoundParameters.ContainsKey("BasePath") -and -not([string]::IsNullOrWhiteSpace($BasePath))) {
         if (-not(Test-Path -LiteralPath $BasePath -PathType Container)) {
-            throw [IgugaError]::PathNotFound($Script:LocalizedData.ErrorBasePathNotFound, $BasePath)
+            throw [IgugaError]::PathNotFound($Script:LocalizedData.ErrorPathNotFound, $BasePath)
         }
         $BasePath = Get-IgugaCanonicalPath -Path $BasePath
     }
