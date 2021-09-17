@@ -12,7 +12,7 @@
 RootModule = 'IgugaChecksumUtility.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.0.7'
+ModuleVersion = '1.0.8'
 
 # Supported PSEditions
 CompatiblePSEditions = @('PSEdition_Desktop', 'PSEdition_Core', 'Windows', 'Linux', 'MacOS')
@@ -123,7 +123,7 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-        ReleaseNotes = 'Add support to send email on validation mode. Only available for PS 7 or higher'
+        ReleaseNotes = 'Fix some bugs'
 
     } # End of PSData hashtable
 

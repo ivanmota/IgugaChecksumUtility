@@ -132,9 +132,9 @@ So then I will need to create the folder `IgugaChecksumUtility` inside of the ab
 
 `C:\Users\ivan2562\Documents\WindowsPowerShell\Modules\IgugaChecksumUtility`
 
-And after that I will need to create a folder with the same name as the version of this module, which is `1.0.7` when I'm writing this tutorial, so my result will be something like:
+And after that I will need to create a folder with the same name as the version of this module, which is `1.0.8` (at the moment I'm writing this tutorial), so my result will be something like:
 
-`C:\Users\ivan2562\Documents\WindowsPowerShell\Modules\IgugaChecksumUtility\1.0.7`
+`C:\Users\ivan2562\Documents\WindowsPowerShell\Modules\IgugaChecksumUtility\1.0.8`
 
 Then I will need to copy all the content of the `Release\IgugaChecksumUtility` folder (folder generated when we build this module) to the above directory.
 
