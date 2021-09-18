@@ -69,7 +69,7 @@ IgugaChecksumUtility -Mode Validate -Path "\\server1\checksums\apps\SHA256SUMS.t
 IgugaChecksumUtility -Mode Compare -Path "C:\Test\File.docx" -Algorithm SHA1 -Hash ED1B042C1B986743C1E34EBB1FAF758549346B24
 ```
 
-Please find below others function that this module export:
+Please find below others functions that this module export:
 
 1. Compare-IgugaFileHash
 2. Get-IgugaChecksum
